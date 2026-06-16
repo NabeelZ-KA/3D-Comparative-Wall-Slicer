@@ -1,15 +1,19 @@
 {
   "name": "test-app",
+  "homepage": "https://nabeelz-ka.github.io/3D-Comparative-Wall-Slicer/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.1",
+    "gh-pages": "^6.3.0",
     "lucida": "^1.1.7",
     "lucide-react": "^1.18.0",
     "react": "^18.2.0",

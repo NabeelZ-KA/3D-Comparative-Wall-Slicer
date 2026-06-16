@@ -5,4 +5,5 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss(),],
+  base: "/3D-Comparative-Wall-Slicer",
 })
