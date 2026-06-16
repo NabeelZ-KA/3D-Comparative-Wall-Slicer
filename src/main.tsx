@@ -1,6 +1,6 @@
 import {StrictMode} from 'react';
 import {createRoot} from 'react-dom/client';
-import StandaloneApp from './StandaloneApp.tsx';
+import StandaloneApp from './StandaloneApp';
 import './index.css';
 
 createRoot(document.getElementById('root')!).render(
