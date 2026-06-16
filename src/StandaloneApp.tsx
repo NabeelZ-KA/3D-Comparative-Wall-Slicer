@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BareBonesSlicer } from "./components/BareBonesSlicer";
 import { Milestone, Wifi, HardHat, ShieldAlert, Cpu } from "lucide-react";
+import myLogo from "/logo/logo.svg";
 
 export default function StandaloneApp() {
   const [backendStatus, setBackendStatus] = useState<string>("Verifying pipeline handshake...");
@@ -29,14 +30,14 @@ export default function StandaloneApp() {
         <div className="flex items-center gap-3 text">
           <div>
             <img 
-            src="/logo.svg" 
+            src={myLogo}
             alt="Unearthed Logo" 
-            className="h-12 w-12 shrink-0 aspect-square object-contain rounded-lg"
+            className="h-12 w-12 shrink-0 aspect-square object-contain rounded"
             />
           </div>
           <div>
             <h1 className="font-sans text-base font-bold text-[#faf3e8] tracking-tight">
-              3D Comparative LiDAR Slicer
+              3D Comparative Wall Slicer
             </h1>
           </div>
         </div>        

@@ -429,7 +429,7 @@ export function BareBonesSlicer() {
         
         <button
           onClick={loadMockGeometricRig}
-          className="flex items-center gap-1.5 px-3.5 py-1.5 bg-[#b25d43] hover:bg-[#c8694c] text-white text-xs font-mono font-bold rounded-none border border-[#b25d43] transition cursor-pointer shrink-0"
+          className="flex items-center gap-1.5 px-3.5 py-1.5 bg-[#c7694a] hover:bg-[#c8694c] text-white text-xs font-mono font-bold rounded-none border border-[#b25d43] transition cursor-pointer shrink-0"
         >
           <span>Load Simulated 16m Dataset</span>
         </button>
@@ -514,9 +514,6 @@ export function BareBonesSlicer() {
                     II. SUBDIVISION & PRECISION CALIBRATION
                   </h3>
                 </div>
-                <span className="text-[10px] font-mono font-bold text-[#faf3e8] bg-[#3a1d15] border border-[#b25d43]/40 px-2.5 py-0.5 rounded-none shadow-sm">
-                  {sliceCount} SLICES
-                </span>
               </div>
 
               <div className="space-y-4">
@@ -973,7 +970,7 @@ export function BareBonesSlicer() {
                   <h4 className="font-mono text-xs font-bold text-[#faf3e8] uppercase tracking-wider">
                     Graph B: Volumetric Loss Percentage
                   </h4>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-none bg-[#25201d] border border-[#3e342f] text-[#e27551] font-semibold shadow-sm">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-none bg-[#25201d] border border-[#3e342f] text-[#faf3e8] font-semibold shadow-sm">
                     Loss (%)
                   </span>
                 </div>
@@ -1092,7 +1089,7 @@ export function BareBonesSlicer() {
                   <h4 className="font-mono text-xs font-bold text-[#faf3e8] uppercase tracking-wider">
                     Graph C: Severity Index (DSI)
                   </h4>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-none bg-[#25201d] border border-[#3e342f] text-emerald-400 font-semibold shadow-sm">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-none bg-[#25201d] border border-[#3e342f] text-[#faf3e8] font-semibold shadow-sm">
                     Coefficient
                   </span>
                 </div>
@@ -1207,7 +1204,7 @@ export function BareBonesSlicer() {
                 </svg>
                 <div className="flex justify-between text-[10px] font-mono text-[#bdae9e] mt-2 pl-14">
                   <span>0.00m origin</span>
-                  <span className="text-[#a4f4c8] font-bold">Stable (Green) ➔ Warning (Yellow) ➔ Collapse (Red)</span>
+                  <span className="text-[#faf3e8] font-bold">Stable (Green) ➔ Warning (Yellow) ➔ Collapse (Red)</span>
                   <span>{lengthMeters.toFixed(2)}m</span>
                 </div>
               </div>
