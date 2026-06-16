@@ -13,12 +13,10 @@ body {
   color: #1f2937;
 }
 
-/* Custom range input styling */
 input[type="range"] {
   accent-color: #2563eb !important;
 }
 
-/* Custom scrollbars matching the clean minimalist theme */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;

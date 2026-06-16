@@ -1,6 +1,5 @@
 import { WallSegment, WallSlice } from "./types";
 
-// Helper to generate a realistic semi-random wall profile with an engineered transgression
 function generateWallSegment(
   id: string,
   name: string,
@@ -21,36 +20,29 @@ function generateWallSegment(
   for (let i = 0; i <= numSlices; i++) {
     const positionX = i * sliceStep;
     
-    // Original ruins profile: wavy heights between 0.8m and 1.3m (as a crumbled wall)
-    // Using sine waves and pseudo-random numbers to look organic
     const originalHeight = 0.95 + 0.25 * Math.sin(positionX * 0.4) + 0.1 * Math.cos(positionX * 1.3);
     const originalWidth = 1.0 + 0.15 * Math.sin(positionX * 0.2);
 
     let transgressedHeight = originalHeight;
     let transgressedWidth = originalWidth;
 
-    // Apply specific transgression profiles
     if (transgressionType === "road_cut") {
-      // Clear 4m gap in the middle representing a modern bulldozed farm track
       const midPoint = lengthMeters / 2;
       if (positionX >= midPoint - 2 && positionX <= midPoint + 2) {
-        transgressedHeight = 0.05 + 0.05 * Math.random(); // cleared to the gravel ground
+        transgressedHeight = 0.05 + 0.05 * Math.random(); 
         transgressedWidth = 0.2 + 0.1 * Math.random();
       }
     } else if (transgressionType === "stone_harvest") {
-      // Periodic dips representing stone larceny for modern sheep folds
       const blockIntervals = [3, 4, 11, 12, 18, 19];
       const sliceIdx = i;
       if (blockIntervals.includes(sliceIdx)) {
-        transgressedHeight = originalHeight * 0.35 + 0.05 * Math.random(); // looted wall height
+        transgressedHeight = originalHeight * 0.35 + 0.05 * Math.random(); 
         transgressedWidth = originalWidth * 0.7;
       }
     } else if (transgressionType === "natural_erosion") {
-      // Gradual slumping of wall due to soil shift or flash floods in the wadi
       if (positionX >= 12 && positionX <= 18) {
-        // localized erosion
-        const scale = (positionX - 12) / 6; // 0 to 1
-        const factor = 1 - 0.55 * Math.sin(scale * Math.PI); // dip in the middle
+        const scale = (positionX - 12) / 6; 
+        const factor = 1 - 0.55 * Math.sin(scale * Math.PI); 
         transgressedHeight = originalHeight * factor;
         transgressedWidth = originalWidth * (factor + 0.1);
       }
@@ -61,7 +53,6 @@ function generateWallSegment(
     const volumeDifference = originalVolume - transgressedVolume;
     const percentageLoss = (volumeDifference / originalVolume) * 100;
     
-    // Flag if volume reduced by more than 15% and volume diff is significant
     const isTransgressed = percentageLoss > 15 && volumeDifference > 0.1;
 
     slices.push({
@@ -133,19 +124,18 @@ export const KHATT_SHABIB_SEGMENTS: WallSegment[] = [
   )
 ];
 
-// Reference images for physical simulator models
 export const MODEL_PLACEHOLDERS = [
   {
     id: "mini-model-1",
     label: "Farm Encroachment Track Simulation",
-    beforeUrl: "https://images.unsplash.com/photo-1544973403-ced1e2e4efbe?auto=format&fit=crop&q=80&w=400", // dry stone desert rocks
-    afterUrl: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&q=80&w=400"  // dirt road cutting stone
+    beforeUrl: "https://images.unsplash.com/photo-1544973403-ced1e2e4efbe?auto=format&fit=crop&q=80&w=400", 
+    afterUrl: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&q=80&w=400"
   },
   {
     id: "mini-model-2",
     label: "Livestock Stone Harvesting Simulation",
-    beforeUrl: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=400", // stacked dry stone blocks
-    afterUrl: "https://images.unsplash.com/photo-1618083707368-b3823daa2726?auto=format&fit=crop&q=80&w=400"  // gaps in stacked blocks
+    beforeUrl: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=400",
+    afterUrl: "https://images.unsplash.com/photo-1618083707368-b3823daa2726?auto=format&fit=crop&q=80&w=400"  
   }
 ];
 
@@ -167,7 +157,6 @@ export const HISTORICAL_CHRONOLOGY = [
   }
 ];
 
-// Helper code to help students in Blender (Python) to automate mesh boolean slicing and volume export!
 export const BLENDER_PYTHON_SCRIPT_TEMPLATE = (
   meshAName: string = "Wall_Original",
   meshBName: string = "Wall_Transgressed",

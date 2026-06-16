@@ -6,7 +6,6 @@ export default function StandaloneApp() {
   const [backendStatus, setBackendStatus] = useState<string>("Verifying pipeline handshake...");
   const [isConnected, setIsConnected] = useState<boolean>(false);
 
-  // Auto-connect to backend on load
   useEffect(() => {
     const pingServer = async () => {
       try {
@@ -25,7 +24,6 @@ export default function StandaloneApp() {
   return (
     <div className="min-h-screen bg-[#13110f] text-[#cdc3b0] font-sans flex flex-col p-4 md:p-8" id="standalone-app-outer">
       
-      {/* 1. PROFESSIONAL ACADEMIC TOPBAR */}
       <header className="max-w-7xl w-full mx-auto mb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-[#1c1917] border border-[#3e342f] p-4 rounded-none" id="standalone-header">
         
         <div className="flex items-center gap-3 text-lg">
@@ -37,16 +35,13 @@ export default function StandaloneApp() {
           </div>
         </div>
         
-        {/* Sync node status */}
         
       </header>
 
-      {/* 2. THE RENDER OBJECT CENTERPIECE */}
       <main className="max-w-7xl w-full mx-auto" id="standalone-main-content">
         <BareBonesSlicer />
       </main>
 
-      {/* 3. SOLID ACADEMIC FOOTER */}
       <footer className="max-w-7xl w-full mx-auto mt-12 border-t border-[#3e342f] pt-6 pb-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left text-xs text-[#8c7e70] font-mono" id="standalone-footer">
         <div className="flex items-center gap-2">
           <span>RoboKings</span>
