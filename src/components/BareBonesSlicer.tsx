@@ -455,7 +455,7 @@ export function BareBonesSlicer() {
         <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex-1">
             <span className="text-[10px] font-mono tracking-wider font-bold text-[#e27551] uppercase">Phase I</span>
-            <h3 className="font-sans text-sm font-bold text-[#faf3e8] mb-1">Upload Baseline (Nominal) OBJ mesh:</h3>
+            <h3 className="font-sans text-sm font-bold text-[#faf3e8] mb-1">Upload Baseline Mesh:</h3>
             <p className="text-[11px] text-[#bdae9e] leading-relaxed">
               Select the initial reference OBJ scan. Points below the Z-crop baseline floor will be discarded.
             </p>
@@ -482,7 +482,7 @@ export function BareBonesSlicer() {
         <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex-1">
             <span className="text-[10px] font-mono tracking-wider font-bold text-[#e27551] uppercase">Phase II</span>
-            <h3 className="font-sans text-sm font-bold text-[#faf3e8] mb-1">Upload Transgressed (Comparative) OBJ:</h3>
+            <h3 className="font-sans text-sm font-bold text-[#faf3e8] mb-1">Upload Transgressed Mesh:</h3>
             <p className="text-[11px] text-[#bdae9e] leading-relaxed">
               Upload the comparative post-displacement scan models to calculate exact net volumetric loss integrals.
             </p>
