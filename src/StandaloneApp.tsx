@@ -26,15 +26,20 @@ export default function StandaloneApp() {
       
       <header className="max-w-7xl w-full mx-auto mb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-[#1c1917] border border-[#3e342f] p-4 rounded-none" id="standalone-header">
         
-        <div className="flex items-center gap-3 text-lg">
-            🧱
+        <div className="flex items-center gap-3 text">
+          <div>
+            <img 
+            src="/logo.svg" 
+            alt="Unearthed Logo" 
+            className="h-12 w-12 shrink-0 aspect-square object-contain rounded-lg"
+            />
+          </div>
           <div>
             <h1 className="font-sans text-base font-bold text-[#faf3e8] tracking-tight">
               3D Comparative LiDAR Slicer
             </h1>
           </div>
-        </div>
-        
+        </div>        
         
       </header>
 

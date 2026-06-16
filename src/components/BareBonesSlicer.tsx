@@ -431,7 +431,6 @@ export function BareBonesSlicer() {
           onClick={loadMockGeometricRig}
           className="flex items-center gap-1.5 px-3.5 py-1.5 bg-[#b25d43] hover:bg-[#c8694c] text-white text-xs font-mono font-bold rounded-none border border-[#b25d43] transition cursor-pointer shrink-0"
         >
-          <Sparkles className="w-3.5 h-3.5 shrink-0 text-white" />
           <span>Load Simulated 16m Dataset</span>
         </button>
       </div>
@@ -439,7 +438,6 @@ export function BareBonesSlicer() {
 
       {errorLog && (
         <div className="bg-[#2a1b18] text-[#f87171] border-l-4 border-[#e27551] p-3 rounded-none mb-6 flex gap-3 text-xs font-mono">
-          <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5 text-[#e27551]" />
           <div>
             <strong className="block font-bold">Registration Fault:</strong>
             <span>{errorLog}</span>
@@ -512,7 +510,6 @@ export function BareBonesSlicer() {
             <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none">
               <div className="flex justify-between items-center border-b border-[#3e342f] pb-2 mb-4">
                 <div className="flex items-center gap-2">
-                  <Cpu className="w-4 h-4 text-[#e27551] shrink-0" />
                   <h3 className="font-mono text-xs font-bold text-[#faf3e8] uppercase tracking-wider">
                     II. SUBDIVISION & PRECISION CALIBRATION
                   </h3>
@@ -700,7 +697,6 @@ export function BareBonesSlicer() {
               <div>
                 <div className="flex justify-between items-center border-b border-[#3e342f] pb-2 mb-4">
                   <div className="flex items-center gap-2">
-                    <Compass className="w-4 h-4 text-[#e27551] shrink-0" />
                     <h3 className="font-mono text-xs font-bold text-[#faf3e8] uppercase tracking-wider">
                       III. CO-REGISTRATION MESH ALIGNMENT
                     </h3>
@@ -1225,7 +1221,6 @@ export function BareBonesSlicer() {
               <div>
                 <div className="flex justify-between items-center border-b border-[#3e342f] pb-2 mb-4">
                   <div className="flex items-center gap-2">
-                    <Ruler className="w-4 h-4 text-[#e27551] shrink-0" />
                     <h3 className="font-mono text-xs font-bold text-[#faf3e8] uppercase tracking-wider">
                       IV. SYNCHRONIZED FOCUS MEASURING TAPE
                     </h3>
@@ -1378,7 +1373,6 @@ export function BareBonesSlicer() {
 
           <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none mb-6">
             <div className="flex items-center gap-2 border-b border-[#3e342f] pb-2 mb-4">
-              <Layers className="w-4 h-4 text-[#e27551] shrink-0" />
               <h3 className="font-mono text-xs font-bold text-[#faf3e8] uppercase tracking-wider">
                 VI. FINE SPATIAL CORRELATION METRICS
               </h3>
@@ -1474,7 +1468,6 @@ export function BareBonesSlicer() {
           <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none">
             <div className="flex justify-between items-center border-b border-[#3e342f] pb-2 mb-4">
               <div className="flex items-center gap-2">
-                <FileSpreadsheet className="w-4 h-4 text-[#e27551] shrink-0" />
                 <h3 className="font-mono text-xs font-bold text-[#faf3e8] uppercase tracking-wider">
                   VII. FULL SPATIAL INTERACTION SYSTEM SHEET LEDGER
                 </h3>
@@ -1484,7 +1477,6 @@ export function BareBonesSlicer() {
                 className="flex items-center gap-1.5 px-3 py-1.5 bg-[#25201d] hover:bg-[#342a25] border border-[#3e342f] text-[#cdc3b0] font-mono text-[11px] font-bold tracking-wide rounded-none shadow-sm transition cursor-pointer"
                 title="Download CSV Spreadsheet file"
               >
-                <FileSpreadsheet className="w-3.5 h-3.5 text-[#e27551] shrink-0" />
                 <span>Export ledger to CSV</span>
               </button>
             </div>
