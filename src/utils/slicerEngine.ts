@@ -1,17 +1,17 @@
 export interface WallSlice {
   sliceIndex: number;
-  positionX: number; // position along the 150 km wall or test segment (in meters)
-  originalHeight: number; // simulated height in meters of the rock pile
-  transgressedHeight: number; // height after transgression
-  originalWidth: number; // width in meters
+  positionX: number; 
+  originalHeight: number;
+  transgressedHeight: number;
+  originalWidth: number; 
   transgressedWidth: number;
-  originalVolume: number; // estimated slice volume V = dx * height * width
+  originalVolume: number;
   transgressedVolume: number;
-  volumeDifference: number; // original - transgressed
-  percentageLoss: number; // (orig - trans) / orig
-  isTransgressed: boolean; // flag if difference exceeds threshold
-  isBoundary?: boolean; // flag if scan ends or tapers here
-  boundaryReason?: string; // explanation of scan boundaries
+  volumeDifference: number;
+  percentageLoss: number; 
+  isTransgressed: boolean;
+  isBoundary?: boolean; 
+  boundaryReason?: string;
 }
 
 export interface Point3D {
@@ -77,10 +77,6 @@ export interface AnomalyZone {
   }>;
 }
 
-/**
- * Parses raw text from an standard OBJ file in the browser,
- * extracting only the vertex coordinates: "v X Y Z".
- */
 export function parseOBJText(text: string): Point3D[] {
   const vertices: Point3D[] = [];
   const lines = text.split("\n");
@@ -99,14 +95,6 @@ export function parseOBJText(text: string): Point3D[] {
   return vertices;
 }
 
-/**
- * Calculates a highly accurate cross-sectional area of a point cloud bucket 
- * using a multi-column Riemann sum with boundary interpolation.
- * 
- * Works by breaking the depth width of the slice bucket into 'numBins' columns.
- * In each column, it finds the representative height (using the top-most percentiles to resist noise).
- * It then integrates the heights via a trapezoidal-like sum.
- */
 export function calculateAccurateCrossSectionArea(
   points: Point3D[],
   zFloor: number,
@@ -118,8 +106,6 @@ export function calculateAccurateCrossSectionArea(
 ): number {
   if (points.length < 4) return 0;
 
-  // Slices cut along X mean we sweep along Y to get the coordinates of the cross-section width.
-  // Slices cut along Y mean we sweep along X.
   const sweepVals = points.map(v => (axis === "X" ? v.y : v.x));
   const minSweep = fixedSweepBounds ? fixedSweepBounds.min : Math.min(...sweepVals);
   const maxSweep = fixedSweepBounds ? fixedSweepBounds.max : Math.max(...sweepVals);
@@ -130,7 +116,6 @@ export function calculateAccurateCrossSectionArea(
   const heights: number[] = Array(numBins).fill(-1);
   const binWidth = width / numBins;
 
-  // Step 1: Populate heights for each bin column
   for (let j = 0; j < numBins; j++) {
     const bMin = minSweep + j * binWidth;
     const bMax = bMin + binWidth;
@@ -143,7 +128,7 @@ export function calculateAccurateCrossSectionArea(
       const zVals = inBin.map(p => p.z);
       zVals.sort((a, b) => a - b);
       
-      let repZ = zVals[zVals.length - 1]; // Max Z height by default
+      let repZ = zVals[zVals.length - 1]; 
       if (estimationPct === 90 && zVals.length >= 5) {
         repZ = zVals[Math.floor(zVals.length * 0.90)];
       } else if (estimationPct === 75 && zVals.length >= 4) {
@@ -151,7 +136,6 @@ export function calculateAccurateCrossSectionArea(
       } else if (estimationPct === 50) {
         repZ = zVals[Math.floor(zVals.length * 0.50)];
       } else if (estimationPct === 30 && zVals.length >= 3) {
-        // Average of the top 30% of heights
         const count = Math.ceil(zVals.length * 0.3);
         const topZ = zVals.slice(-count);
         repZ = topZ.reduce((s, v) => s + v, 0) / count;
@@ -161,9 +145,7 @@ export function calculateAccurateCrossSectionArea(
     }
   }
 
-  // Step 2: Void Representation (Empty Bins) Handling
   if (voidHandlingMode === "interpolate") {
-    // Reconstruct missing points across cavities using linear boundary interpolation
     for (let j = 0; j < numBins; j++) {
       if (heights[j] === -1) {
         let leftIdx = -1;
@@ -195,7 +177,6 @@ export function calculateAccurateCrossSectionArea(
       }
     }
   } else {
-    // Strict mode: cavities are treated as empty air (0 height)
     for (let j = 0; j < numBins; j++) {
       if (heights[j] === -1) {
         heights[j] = 0;
@@ -203,15 +184,10 @@ export function calculateAccurateCrossSectionArea(
     }
   }
 
-  // Step 3: Numerical Integration (Riemann column summation)
   const sumArea = heights.reduce((sum, h) => sum + h * binWidth, 0);
   return sumArea;
 }
 
-/**
- * Calculates a bounding box and an integrated Riemann volume estimation 
- * for a filtered point cloud, providing summary statistics.
- */
 export function calculateMeshStats(
   vertices: Point3D[],
   zTrim: number = 0.0,
@@ -239,7 +215,6 @@ export function calculateMeshStats(
   const ySize = maxY - minY;
   const zSize = maxZ - minZ;
 
-  // Split mesh into 50 subdivisions along current slicing axis for fine-grained integrated volume estimation
   let totalVol = 0;
   const numSubdivisions = 50;
   const trackingSize = slicingAxis === "X" ? xSize : ySize;
@@ -265,7 +240,6 @@ export function calculateMeshStats(
       totalVol += subArea * subWidth;
     }
   } else {
-    // Fallback bounding estimator if points are sparse
     totalVol = xSize * ySize * zSize * 0.55;
   }
 
@@ -280,9 +254,6 @@ export function calculateMeshStats(
   };
 }
 
-/**
- * Attenuates relative points down to maxN for speedy matrix math in browser threads.
- */
 export function samplePoints(pts: Point3D[], maxN = 300): Point3D[] {
   if (pts.length <= maxN) return pts;
   const step = Math.floor(pts.length / maxN);
@@ -293,14 +264,10 @@ export function samplePoints(pts: Point3D[], maxN = 300): Point3D[] {
   return result;
 }
 
-/**
- * Computes the premium double-sided Chamfer point distance and worst-case Hausdorff bounds.
- */
 export function computeChamferAndHausdorff(
   bPts: Point3D[],
   aPts: Point3D[]
 ): { chamfer: number; hausdorff: number } {
-  // Sub-sample down to 300 points to ensure instant O(N * M) nearest-neighbor execution (~1-2ms)
   const subBefore = samplePoints(bPts, 300);
   const subAfter = samplePoints(aPts, 300);
 
@@ -348,10 +315,6 @@ export function computeChamferAndHausdorff(
   return { chamfer, hausdorff };
 }
 
-/**
- * Creates logical voxel occupancy meshes across shared bounding boxes 
- * to determine spatial coordinate overlapping Jaccard indices.
- */
 export function computeVoxelMetrics(
   bPts: Point3D[],
   aPts: Point3D[]
@@ -378,7 +341,6 @@ export function computeVoxelMetrics(
   const ry = Math.max(0.1, maxY - minY);
   const rz = Math.max(0.1, maxZ - minZ);
 
-  // Voxel mesh bounds
   const gX = 15;
   const gY = 8;
   const gZ = 8;
@@ -426,9 +388,6 @@ export function computeVoxelMetrics(
   return { jaccardIoU, erosionPercentage, slumpingPercentage };
 }
 
-/**
- * Computes RMS elevation dispersion to serve as index of micro-roughness.
- */
 export function computeRoughnessIndex(pts: Point3D[], zBase: number): number {
   if (pts.length === 0) return 0;
   const heights = pts.map((v) => v.z - zBase);
@@ -441,10 +400,6 @@ export function computeRoughnessIndex(pts: Point3D[], zBase: number): number {
   return Math.sqrt(avgSqDiff);
 }
 
-/**
- * Regularizes Ratio Gaps via a smooth-factor buffer to avoid divide-by-zero boundary issues
- * when baseline volumes approach zero. Attenuates erratic boundary noise.
- */
 export function getDsiValue(
   origVal: number, 
   transVal: number, 
@@ -458,11 +413,6 @@ export function getDsiValue(
   return Math.max(0, Math.min(1.0, dsi));
 }
 
-/**
- * Slice alignment processor. Steps along the wall's major coordinates, sweeps point buckets, 
- * runs numerical integrals to find Cross-sectional Areas, calculates Sliced Volumes,
- * and determines transgression states with structural edge safeguards.
- */
 export function computeSlices(options: {
   beforeVerts: Point3D[];
   afterVerts: Point3D[];
@@ -472,12 +422,12 @@ export function computeSlices(options: {
   yOffset: number;
   zOffset: number;
   sliceCount: number;
-  lossThreshold: number;       // e.g. 15 (%)
-  valVolumeThreshold: number;  // e.g. 0.05 (m3)
+  lossThreshold: number;       
+  valVolumeThreshold: number;  
   slicingAxis: "X" | "Y";
-  heightEstimationPct: number; // e.g. 90
+  heightEstimationPct: number; 
   voidHandling: "strict" | "interpolate";
-  dsiSensitivity: number;      // e.g. 1.0
+  dsiSensitivity: number;      
 }): { slices: WallSlice[]; lengthMeters: number; sliceStep: number } | null {
   const {
     beforeVerts,
@@ -709,10 +659,6 @@ export function computeSlices(options: {
   return { slices, lengthMeters, sliceStep };
 }
 
-/**
- * 4-Way Bayesian Causal Matcher for Archaeological Breaches.
- * Resolves probability values linking physical geometry states to causes.
- */
 export function calculateCauseProbabilities(zone: {
   maxLoss: number;
   avgLoss: number;
@@ -724,7 +670,6 @@ export function calculateCauseProbabilities(zone: {
   const maxLoss = zone.maxLoss;
   const avgLoss = zone.avgLoss;
   
-  // 1. Vehicle impact ( bulldozer/tractors, narrow/medium width 1.5-3.5m, high vertical shear loss >15% )
   let vehicleScore = 0;
   if (maxLoss > 15) vehicleScore += 45;
   if (maxLoss > 25) vehicleScore += 20;
@@ -733,7 +678,6 @@ export function calculateCauseProbabilities(zone: {
   else vehicleScore += 10;
   vehicleScore = Math.min(98, Math.max(5, vehicleScore));
 
-  // 2. Grazing animals ( trampling/crossovers, narrow < 1.8m, lower max loss 6-15%, V-shape crumble )
   let animalScore = 0;
   if (maxLoss >= 6 && maxLoss <= 16) animalScore += 40;
   else if (maxLoss > 16) animalScore += Math.max(5, 30 - (maxLoss - 16) * 2);
@@ -741,21 +685,18 @@ export function calculateCauseProbabilities(zone: {
   else animalScore += Math.max(0, 15 - (span - 2.0) * 8);
   animalScore = Math.min(95, Math.max(4, animalScore));
 
-  // 3. Stone harvesting ( Theft / Looting, broad span > 2.5m, steady sequential height loss 7-22% with neat borders )
   let theftScore = 0;
   if (span >= 2.5) theftScore += 45;
   if (avgLoss >= 7 && avgLoss <= 22) theftScore += 40;
   else if (avgLoss > 22) theftScore += 20;
   theftScore = Math.min(94, Math.max(3, theftScore));
 
-  // 4. Natural Weathering & Soil Creep ( Erosion / Slump, widespread span > 4.0m, low max loss < 12% )
   let weatherScore = 0;
   if (span >= 4.0) weatherScore += 45;
   if (avgLoss < 12) weatherScore += 40;
   else weatherScore += Math.max(0, 20 - (avgLoss - 12) * 2);
   weatherScore = Math.min(92, Math.max(8, weatherScore));
 
-  // Normalize scores to form actual robust probability weights totaling 100%
   const sum = vehicleScore + animalScore + theftScore + weatherScore;
   return [
     { id: "vehicle", label: "Vehicle Impact", score: Math.round((vehicleScore / sum) * 100), color: "bg-red-500", icon: "🚚" },
@@ -765,10 +706,6 @@ export function calculateCauseProbabilities(zone: {
   ].sort((a, b) => b.score - a.score);
 }
 
-/**
- * Groups contiguous transgressed slices together, and calculates physical causal attribution
- * metrics for each transgression region automatically.
- */
 export function getTransgressionZones(slices: WallSlice[]): AnomalyZone[] {
   const zones: {
     startIndex: number;
@@ -865,10 +802,6 @@ export function getTransgressionZones(slices: WallSlice[]): AnomalyZone[] {
   });
 }
 
-/**
- * Executes a full comparative analysis over two datasets, assembling cross-sectional areas,
- * bounding sizes, distance metrics, voxel co-occupancies, severity indices, and anomaly regions.
- */
 export function runFullAnalyticalPipeline(params: {
   beforeVerts: Point3D[];
   afterVerts: Point3D[];
@@ -918,7 +851,6 @@ export function runFullAnalyticalPipeline(params: {
     params.voidHandling
   );
 
-  // Filter vertices according to trim layers
   const bPtsFiltered = params.beforeVerts.filter(v => v.z >= params.beforeZTrim);
   const aPtsFiltered = alignedAfterVerts.filter(v => v.z >= params.afterZTrim + params.zOffset);
 

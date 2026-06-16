@@ -29,9 +29,6 @@ import {
 } from "lucide-react";
 
 export function BareBonesSlicer() {
-  // ----------------------------------------------------
-  // A. SCIENTIFIC STATE INITIATION
-  // ----------------------------------------------------
   const [beforeVerts, setBeforeVerts] = useState<Point3D[]>([]);
   const [afterVerts, setAfterVerts] = useState<Point3D[]>([]);
   
@@ -41,37 +38,32 @@ export function BareBonesSlicer() {
   const [errorLog, setErrorLog] = useState<string>("");
   const [infoLog, setInfoLog] = useState<string>("");
 
-  // 1. Scan Optimization & Alignment sliders (m)
-  const [beforeZTrim, setBeforeZTrim] = useState<number>(0.0); // ground trim floor
-  const [afterZTrim, setAfterZTrim] = useState<number>(0.0);   // comparison trim floor
-  const [xOffset, setXOffset] = useState<number>(0.0);          // longitudinal shift x
-  const [yOffset, setYOffset] = useState<number>(0.0);          // transversal shift y
-  const [zOffset, setZOffset] = useState<number>(0.0);          // vertical shift z
+  const [beforeZTrim, setBeforeZTrim] = useState<number>(0.0); 
+  const [afterZTrim, setAfterZTrim] = useState<number>(0.0);   
+  const [xOffset, setXOffset] = useState<number>(0.0);         
+  const [yOffset, setYOffset] = useState<number>(0.0);         
+  const [zOffset, setZOffset] = useState<number>(0.0);         
 
-  // 2. Resolution Subdivision Controller
+  
   const [sliceCount, setSliceCount] = useState<number>(30);
 
-  // 3. Dynamic Analytical Alert Thresholds
-  const [lossThreshold, setLossThreshold] = useState<number>(15.0);  // volume loss percentage anomaly limit
-  const [valVolumeThreshold, setValVolumeThreshold] = useState<number>(0.0004); // volume loss boundary threshold (m³)
-  const [dsiSensitivity, setDsiSensitivity] = useState<number>(1.0); // Deficit Severity Index sensitivity scaler
+  const [lossThreshold, setLossThreshold] = useState<number>(15.0);  
+  const [valVolumeThreshold, setValVolumeThreshold] = useState<number>(0.0004); 
+  const [dsiSensitivity, setDsiSensitivity] = useState<number>(1.0); 
 
-  // 4. Scan Profile and Noise filter parameters
+
   const [slicingAxis, setSlicingAxis] = useState<"X" | "Y">("X");
-  const [heightEstimationPct, setHeightEstimationPct] = useState<number>(90); // percentile height representative
+  const [heightEstimationPct, setHeightEstimationPct] = useState<number>(90); 
   const [voidHandling, setVoidHandling] = useState<"strict" | "interpolate">("strict");
 
-  // Synchronized pointer track index
+
   const [selectedSliceIndex, setSelectedSliceIndex] = useState<number | null>(0);
 
-  // 5. Gemini Integration State
+
   const [analysisType, setAnalysisType] = useState<"classification" | "blocks" | "rebuild">("classification");
   const [geminiReport, setGeminiReport] = useState<string>("");
   const [isAnalyzing, setIsAnalyzing] = useState<boolean>(false);
 
-  // ----------------------------------------------------
-  // B. OBJ STREAMING READER HANDLERS
-  // ----------------------------------------------------
   const processOBJ = (file: File, target: "before" | "after") => {
     if (!file) return;
     setLoading(true);
@@ -118,9 +110,6 @@ export function BareBonesSlicer() {
     }
   };
 
-  // ----------------------------------------------------
-  // C. THE RECTIVE PIPELINE CALCULUS
-  // ----------------------------------------------------
   const analyticalData = useMemo(() => {
     if (beforeVerts.length === 0 || afterVerts.length === 0) {
       return null;
@@ -164,7 +153,6 @@ export function BareBonesSlicer() {
     dsiSensitivity
   ]);
 
-  // Safe destructuring of computed geometry arrays
   const slices: WallSlice[] = analyticalData?.slices || [];
   const statsBefore: MeshStats | null = analyticalData?.statsBefore || null;
   const statsAfter: MeshStats | null = analyticalData?.statsAfter || null;
@@ -173,41 +161,30 @@ export function BareBonesSlicer() {
   const lengthMeters: number = analyticalData?.lengthMeters || 0;
   const sliceStep: number = analyticalData?.sliceStep || 0;
 
-  // Selected slice convenience pointer
   const chosenSlice: WallSlice | null = 
     selectedSliceIndex !== null && slices[selectedSliceIndex] 
       ? slices[selectedSliceIndex] 
       : null;
 
-  // Automatically scroll table row and corresponding anomaly card into view when a slice is highlighted
   React.useEffect(() => {
-    // Scroll effect disabled as requested by the user, avoiding viewport jumps on highlighting a point
   }, [selectedSliceIndex, anomalies]);
 
-  // ----------------------------------------------------
-  // D. PRESET SYNTHETIC DATA GENERATOR (For immediate preview)
-  // ----------------------------------------------------
   const loadMockGeometricRig = () => {
     const mockBefore: Point3D[] = [];
     const mockAfter: Point3D[] = [];
 
-    // Sweeping segment density coordinates
     const segmentsCount = 1000;
     for (let i = 0; i < segmentsCount; i++) {
-      const x = (i / segmentsCount) * 16.0; // 16-meter long wall segment
+      const x = (i / segmentsCount) * 16.0; 
       const yWidth = 1.4;
       
       for (let j = 0; j < 15; j++) {
-        const y = (j / 15) * yWidth - yWidth / 2; // y span
+        const y = (j / 15) * yWidth - yWidth / 2;
         
-        // Before (Nominal Dry-Stone Wall baseline)
         const zBase = 1.25 + Math.sin(x * 0.35) * 0.12 + Math.cos(y * 1.8) * 0.04;
         mockBefore.push({ x, y, z: zBase });
-        mockBefore.push({ x: x + 0.003, y: y + 0.002, z: zBase - 0.08 }); // fine grain coordinates
+        mockBefore.push({ x: x + 0.003, y: y + 0.002, z: zBase - 0.08 });
 
-        // After (Post-Transgression state showing two collapses/washouts)
-        // Washout 1: Vehicle Impact Collapse between 3.5m and 6.0m (terracotta breach)
-        // Washout 2: Heavy Weathering Trail between 11.0m and 13.0m (moderate breach)
         let zAfter = zBase;
         if (x >= 3.5 && x <= 6.0) {
           const factorX = Math.sin(((x - 3.5) / 2.5) * Math.PI);
@@ -226,12 +203,11 @@ export function BareBonesSlicer() {
     setAfterVerts(mockAfter);
     setBeforeFileName("Jordan_MainWall_Baseline.obj");
     setAfterFileName("Jordan_MainWall_PostIncident.obj");
-    setSelectedSliceIndex(12); // pre-select an active gap for nice demonstration
+    setSelectedSliceIndex(12);
     setErrorLog("");
     setInfoLog("Loaded high-density 16-meter Great Wall of Jordan physical simulator rig.");
   };
 
-  // Helper helper to sample points
   const samplePointsForAlign = (pts: Point3D[], maxN = 120): Point3D[] => {
     if (pts.length <= maxN) return pts;
     const step = Math.floor(pts.length / maxN);
@@ -242,9 +218,6 @@ export function BareBonesSlicer() {
     return result;
   };
 
-  // ----------------------------------------------------
-  // E. HIGH-PRECISION AUTO-ALIGN ALGORITHM (Centroid + Coordinate Descent)
-  // ----------------------------------------------------
   const handleAutoAlign = () => {
     if (beforeVerts.length === 0 || afterVerts.length === 0) {
       setErrorLog("Auto-align failed: Please upload or load files first.");
@@ -253,7 +226,6 @@ export function BareBonesSlicer() {
     setErrorLog("");
     setInfoLog("Computing ideal spatial overlapping alignment matrix. Please stand by...");
 
-    // 1. Get filtered points
     const fBefore = beforeVerts.filter(v => v.z >= beforeZTrim);
     const fAfter = afterVerts.filter(v => v.z >= afterZTrim);
 
@@ -262,7 +234,6 @@ export function BareBonesSlicer() {
       return;
     }
 
-    // 2. Compute centroids (Barycentric center)
     let bSumX = 0, bSumY = 0, bSumZ = 0;
     fBefore.forEach(p => { bSumX += p.x; bSumY += p.y; bSumZ += p.z; });
     const bCentroid = {
@@ -279,13 +250,10 @@ export function BareBonesSlicer() {
       z: aSumZ / fAfter.length
     };
 
-    // Initial offset to align centers
     const initX = bCentroid.x - aCentroid.x;
     const initY = bCentroid.y - aCentroid.y;
-    // Align Z to match centroids
     const initZ = bCentroid.z - aCentroid.z;
 
-    // Subsample points for super fast nearest-neighbor calculations (O(N*M))
     const subBefore = samplePointsForAlign(fBefore, 100);
     const subAfter = samplePointsForAlign(fAfter, 100);
 
@@ -310,10 +278,8 @@ export function BareBonesSlicer() {
     let bestZ = initZ;
     let bestScore = getScore(bestX, bestY, bestZ);
 
-    // Perform coordinate descent parameter optimization around centroid to find local Chamfer minimum
     const stepSizes = [0.1, 0.04, 0.01, 0.002];
     for (const step of stepSizes) {
-      // Optimize X
       for (const offset of [-step, step]) {
         const score = getScore(bestX + offset, bestY, bestZ);
         if (score < bestScore) {
@@ -321,7 +287,6 @@ export function BareBonesSlicer() {
           bestX += offset;
         }
       }
-      // Optimize Y
       for (const offset of [-step, step]) {
         const score = getScore(bestX, bestY + offset, bestZ);
         if (score < bestScore) {
@@ -329,7 +294,6 @@ export function BareBonesSlicer() {
           bestY += offset;
         }
       }
-      // Optimize Z
       for (const offset of [-step, step]) {
         const score = getScore(bestX, bestY, bestZ + offset);
         if (score < bestScore) {
@@ -346,13 +310,9 @@ export function BareBonesSlicer() {
     setInfoLog(`Auto-Align Matrix Solved! Centroids translated. Applied translations: dx: ${bestX.toFixed(4)}m, dy: ${bestY.toFixed(4)}m, dz: ${bestZ.toFixed(4)}m. Minimized spatial drift deviation: ${bestScore.toFixed(5)}m.`);
   };
 
-  // ----------------------------------------------------
-  // F. CSV LEDGER EXPORTER SYSTEM
-  // ----------------------------------------------------
   const handleExportCSV = () => {
     if (slices.length === 0) return;
     
-    // Create CSV header
     let csv = "Index,X Position (m),Original Volume (m3),Transgressed Volume (m3),Difference Net (m3),Loss Percentage (%),Breach Status,Boundary Reason\r\n";
     
     slices.forEach((s) => {
@@ -369,9 +329,6 @@ export function BareBonesSlicer() {
     document.body.removeChild(link);
   };
 
-  // ----------------------------------------------------
-  // G. CALL GEMINI API PROXY FOR ANOMALIES
-  // ----------------------------------------------------
   const handleRequestGeminiReport = async () => {
     if (!analyticalData) {
       setErrorLog("Cannot generate report: Make sure baseline and transgressed scans are loaded and aligned.");
@@ -381,7 +338,6 @@ export function BareBonesSlicer() {
     setErrorLog("");
     setGeminiReport("");
 
-    // Prepare a clean condensed CSV segment (first 12 slices) to send as context without inflating context limits
     const condensedSlices = slices.slice(0, 15).map(s => 
       `Index:${s.sliceIndex}|X:${s.positionX.toFixed(2)}m|OrigV:${s.originalVolume.toFixed(3)}|TransV:${s.transgressedVolume.toFixed(3)}|Loss:${s.percentageLoss}%`
     ).join("\n");
@@ -432,29 +388,24 @@ export function BareBonesSlicer() {
     }
   };
 
-  // Helper to render Markdown segments into clean typography format
   const renderCustomMarkdown = (text: string) => {
     if (!text) return null;
     const lines = text.split("\n");
     return lines.map((line, ix) => {
-      // Headers
       if (line.startsWith("### ")) {
         return <h4 key={ix} className="text-[#e27551] font-mono text-xs font-bold mt-4 mb-2 tracking-tight uppercase flex items-center {ix === 0 ? 'mt-1' : ''}"><ChevronRight className="w-4 h-4 mr-1 text-[#e27551] shrink-0" />{line.replace("### ", "")}</h4>;
       }
       if (line.startsWith("## ") || line.startsWith("# ")) {
         return <h3 key={ix} className="text-[#faf3e8] font-sans text-sm font-bold mt-5 mb-2 border-l-2 border-[#b25d43] pl-2">{line.replace("## ", "").replace("# ", "")}</h3>;
       }
-      // Bullet items
       if (line.trim().startsWith("- ") || line.trim().startsWith("* ")) {
         const itemText = line.trim().replace(/^[-*]\s+/, "");
-        // parse inline bold
         return (
           <li key={ix} className="text-[#cdc3b0] font-sans text-[12.5px] leading-relaxed ml-4 my-1 list-disc">
             {parseInlineBold(itemText)}
           </li>
         );
       }
-      // Clean paragraphs
       if (line.trim().length > 0) {
         return <p key={ix} className="text-[#cdc3b0] font-sans text-xs leading-relaxed my-2">{parseInlineBold(line)}</p>;
       }
@@ -467,12 +418,8 @@ export function BareBonesSlicer() {
     return parts.map((part, i) => i % 2 === 1 ? <strong key={i} className="text-[#e27551] font-bold">{part}</strong> : part);
   };
 
-  // ----------------------------------------------------
-  // H. RENDER LAYOUT
-  // ----------------------------------------------------
   return (
     <div className="w-full flex flex-col bg-[#13110f] text-[#cdc3b0] antialiased font-sans" id="barebones-slicer-view">
-      {/* 1. Minimalist Integrated Data Preset Bar */}
       <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
         <div>
           <span className="font-sans text-sm font-bold text-[#faf3e8] mb-1">
@@ -504,9 +451,7 @@ export function BareBonesSlicer() {
         <div ></div>
       )}
 
-      {/* 2. Upload Workspace */}
       <div className="flex flex-col gap-4 mb-6">
-        {/* Baseline upload box */}
         <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex-1">
             <span className="text-[10px] font-mono tracking-wider font-bold text-[#e27551] uppercase">Phase I</span>
@@ -534,7 +479,6 @@ export function BareBonesSlicer() {
           )}
         </div>
 
-        {/* Transgressed upload box */}
         <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex-1">
             <span className="text-[10px] font-mono tracking-wider font-bold text-[#e27551] uppercase">Phase II</span>
@@ -569,10 +513,8 @@ export function BareBonesSlicer() {
       ) : (
         <div className="space-y-6">
           
-          {/* 3. Sliding controls deck & Auto-registration Soler */}
           <div className="space-y-4">
             
-            {/* PARAMETERS PANEL */}
             <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none">
               <div className="flex justify-between items-center border-b border-[#3e342f] pb-2 mb-4">
                 <div className="flex items-center gap-2">
@@ -587,7 +529,6 @@ export function BareBonesSlicer() {
               </div>
 
               <div className="space-y-4">
-                {/* Resolution count */}
                 <div>
                   <div className="flex justify-between text-xs font-mono mb-1">
                     <span className="text-[#cdc3b0]">Cross-sectional subdivision density:</span>
@@ -607,7 +548,6 @@ export function BareBonesSlicer() {
                   </span>
                 </div>
 
-                {/* Percentage area loss threshold */}
                 <div>
                   <div className="flex justify-between text-xs font-mono mb-1">
                     <span className="text-[#cdc3b0]">Percentage Area depletion floor:</span>
@@ -627,7 +567,6 @@ export function BareBonesSlicer() {
                   </span>
                 </div>
 
-                {/* Absolute Volume threshold */}
                 <div>
                   <div className="flex justify-between text-xs font-mono mb-1">
                     <span className="text-[#cdc3b0]">Metric volume deficit limit:</span>
@@ -647,7 +586,6 @@ export function BareBonesSlicer() {
                   </span>
                 </div>
 
-                {/* Deficit Severity Index sensitivity */}
                 <div>
                   <div className="flex justify-between text-xs font-mono mb-1">
                     <span className="text-[#cdc3b0]">Deficit Severity Index (DSI) scaling:</span>
@@ -667,7 +605,6 @@ export function BareBonesSlicer() {
                   </span>
                 </div>
 
-                {/* Scan Slicing Axis */}
                 <div className="border-t border-[#3e342f] pt-3">
                   <div className="flex justify-between text-xs font-mono mb-1.5">
                     <span className="text-[#cdc3b0]">Scan Slicing Axis:</span>
@@ -699,7 +636,6 @@ export function BareBonesSlicer() {
                   </div>
                 </div>
 
-                {/* Outlier Height Percentile */}
                 <div className="border-t border-[#3e342f] pt-3">
                   <div className="flex justify-between text-xs font-mono mb-1.5">
                     <span className="text-[#cdc3b0]">Height Filtering (Outlier Noise):</span>
@@ -730,7 +666,6 @@ export function BareBonesSlicer() {
                   </div>
                 </div>
 
-                {/* Void Space / Hole shadow */}
                 <div className="border-t border-[#3e342f] pt-3">
                   <div className="flex justify-between text-xs font-mono mb-1.5">
                     <span className="text-[#cdc3b0]">Void Shadow Interpolation:</span>
@@ -767,7 +702,6 @@ export function BareBonesSlicer() {
               </div>
             </div>
 
-            {/* REGISTER-ALIGNMENT PANEL */}
             <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none flex flex-col justify-between">
               <div>
                 <div className="flex justify-between items-center border-b border-[#3e342f] pb-2 mb-4">
@@ -787,7 +721,6 @@ export function BareBonesSlicer() {
                 </div>
 
                 <div className="space-y-4">
-                  {/* Z-Crop Baseline */}
                   <div>
                     <div className="flex justify-between text-xs font-mono mb-1">
                       <span className="text-[#cdc3b0]">Baseline Trim (Z-Crop Height):</span>
@@ -804,7 +737,6 @@ export function BareBonesSlicer() {
                     />
                   </div>
 
-                  {/* Z-Crop Transgressed */}
                   <div>
                     <div className="flex justify-between text-xs font-mono mb-1">
                       <span className="text-[#cdc3b0]">Comparison Trim (Z-Crop Height):</span>
@@ -821,7 +753,6 @@ export function BareBonesSlicer() {
                     />
                   </div>
 
-                  {/* Manual Alignment offsets group */}
                   <div className="grid grid-cols-3 gap-3 border-t border-[#3e342f] pt-3 mt-3">
                     <div>
                       <div className="flex justify-between text-[11px] font-mono mb-1">
@@ -883,10 +814,8 @@ export function BareBonesSlicer() {
 
           </div>
 
-          {/* 4. THREE SCIENTIFIC SYNCHRONIZED VECTOR GRAPHS */}
           <div className="flex flex-col gap-6 my-6">
             
-            {/* GRAPH A: MULTI-SERIES SUPERIMPOSED VOLUME */}
             <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none flex flex-col justify-between">
               <div>
                 <div className="flex justify-between items-center mb-1">
@@ -902,7 +831,6 @@ export function BareBonesSlicer() {
                 </p>
               </div>
 
-              {/* Dynamic Y-Axis SVG Vector Graph */}
               <div className="w-full relative bg-[#13110f] rounded-none p-2 border border-[#3e342f]">
                 <svg viewBox="0 0 600 180" className="w-full h-44 overflow-visible">
                   <defs>
@@ -933,7 +861,6 @@ export function BareBonesSlicer() {
 
                     return (
                       <>
-                        {/* Dynamic Y-Axis Gridlines & Labels */}
                         {volTicks.map((val, tIdx) => {
                           const y = getY(val);
                           return (
@@ -946,7 +873,6 @@ export function BareBonesSlicer() {
                           );
                         })}
 
-                        {/* Interactive highlighted background zone for active anomalies */}
                         {anomalies.map((zone, zIdx) => {
                           const xStart = getX(zone.startIndex);
                           const xEnd = getX(zone.endIndex);
@@ -969,7 +895,6 @@ export function BareBonesSlicer() {
                           );
                         })}
 
-                        {/* Baseline volume envelope */}
                         <path
                           d={`M 65,150 ${slices.map((s, idx) => {
                             return `L ${getX(idx).toFixed(1)},${getY(s.originalVolume).toFixed(1)}`;
@@ -981,7 +906,6 @@ export function BareBonesSlicer() {
                           strokeDasharray="3,3"
                         />
 
-                        {/* Transgressed/remaining volume envelope */}
                         <path
                           d={`M 65,150 ${slices.map((s, idx) => {
                             return `L ${getX(idx).toFixed(1)},${getY(s.transgressedVolume).toFixed(1)}`;
@@ -991,7 +915,6 @@ export function BareBonesSlicer() {
                           strokeWidth="2.2"
                         />
 
-                        {/* Interactive columns overlay for perfect mouse hover tracking */}
                         {slices.map((s, idx) => {
                           const colW = 515 / slices.length;
                           const x = getX(idx) - (colW / 2);
@@ -1010,7 +933,6 @@ export function BareBonesSlicer() {
                           );
                         })}
 
-                        {/* Synchronized selected slice indicator line & points */}
                         {selectedSliceIndex !== null && slices[selectedSliceIndex] && (() => {
                           const selS = slices[selectedSliceIndex];
                           const xVal = getX(selectedSliceIndex);
@@ -1044,7 +966,6 @@ export function BareBonesSlicer() {
                       </>
                     );
                   })()}
-                  {/* Left and Bottom axis lines */}
                   <line x1={65} y1={15} x2={65} y2={150} stroke="#5a4e45" strokeWidth="1.5" />
                   <line x1={65} y1={150} x2={580} y2={150} stroke="#5a4e45" strokeWidth="1.5" />
                 </svg>
@@ -1056,7 +977,6 @@ export function BareBonesSlicer() {
               </div>
             </div>
 
-            {/* GRAPH B: VOLUMETRIC LOSS PERCENTAGE */}
             <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none flex flex-col justify-between">
               <div>
                 <div className="flex justify-between items-center mb-1">
@@ -1072,7 +992,6 @@ export function BareBonesSlicer() {
                 </p>
               </div>
 
-              {/* Dynamic Y-Axis SVG Vector Graph */}
               <div className="w-full relative bg-[#13110f] rounded-none p-2 border border-[#3e342f]">
                 <svg viewBox="0 0 600 180" className="w-full h-44 overflow-visible">
                   {slices.length > 0 && (() => {
@@ -1082,7 +1001,6 @@ export function BareBonesSlicer() {
 
                     return (
                       <>
-                        {/* Dynamic Y-Axis Gridlines & Labels */}
                         {[0, 0.5, 1.0].map((ratio) => {
                           const val = ratio * maxLoss;
                           const y = getY(val);
@@ -1096,7 +1014,6 @@ export function BareBonesSlicer() {
                           );
                         })}
 
-                        {/* Interactive highlighted background zone for active anomalies */}
                         {anomalies.map((zone, zIdx) => {
                           const xStart = getX(zone.startIndex);
                           const xEnd = getX(zone.endIndex);
@@ -1119,7 +1036,6 @@ export function BareBonesSlicer() {
                           );
                         })}
 
-                        {/* Render individual vertical loss bars */}
                         {slices.map((s, idx) => {
                           const xVal = getX(idx);
                           const h = (s.percentageLoss / maxLoss) * 135;
@@ -1137,7 +1053,6 @@ export function BareBonesSlicer() {
                           );
                         })}
 
-                        {/* Interactive columns overlay for perfect hover tracking */}
                         {slices.map((s, idx) => {
                           const colW = 515 / slices.length;
                           const x = getX(idx) - (colW / 2);
@@ -1156,7 +1071,6 @@ export function BareBonesSlicer() {
                           );
                         })}
 
-                        {/* Synchronized cursor track */}
                         {selectedSliceIndex !== null && (
                           <line
                             x1={getX(selectedSliceIndex)}
@@ -1171,7 +1085,6 @@ export function BareBonesSlicer() {
                       </>
                     );
                   })()}
-                  {/* Axis lines */}
                   <line x1={65} y1={15} x2={65} y2={150} stroke="#5a4e45" strokeWidth="1.5" />
                   <line x1={65} y1={150} x2={580} y2={150} stroke="#5a4e45" strokeWidth="1.5" />
                 </svg>
@@ -1183,7 +1096,6 @@ export function BareBonesSlicer() {
               </div>
             </div>
 
-            {/* GRAPH C: PRESERVATION LEVEL / SEVERITY INDEX */}
             <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none flex flex-col justify-between">
               <div>
                 <div className="flex justify-between items-center mb-1">
@@ -1199,7 +1111,6 @@ export function BareBonesSlicer() {
                 </p>
               </div>
 
-              {/* Dynamic Y-Axis SVG Vector Graph */}
               <div className="w-full relative bg-[#13110f] rounded-none p-2 border border-[#3e342f]">
                 <svg viewBox="0 0 600 180" className="w-full h-44 overflow-visible">
                   {slices.length > 0 && (() => {
@@ -1210,7 +1121,6 @@ export function BareBonesSlicer() {
 
                     return (
                       <>
-                        {/* Dynamic Y-Axis Gridlines & Labels */}
                         {[0, 0.5, 1.0].map((ratio) => {
                           const val = ratio * maxSeverity;
                           const y = getY(val);
@@ -1224,7 +1134,6 @@ export function BareBonesSlicer() {
                           );
                         })}
 
-                        {/* Interactive highlighted background zone for active anomalies */}
                         {anomalies.map((zone, zIdx) => {
                           const xStart = getX(zone.startIndex);
                           const xEnd = getX(zone.endIndex);
@@ -1247,7 +1156,6 @@ export function BareBonesSlicer() {
                           );
                         })}
 
-                        {/* Continuous trend line */}
                         <path
                           d={slices.map((s, idx) => {
                             const val = getSeverity(s);
@@ -1258,16 +1166,15 @@ export function BareBonesSlicer() {
                           strokeWidth="2"
                         />
 
-                        {/* Point markers mapped */}
                         {slices.map((s, idx) => {
                           const xVal = getX(idx);
                           const sValue = getSeverity(s);
                           const yVal = getY(sValue);
                           const isSelected = selectedSliceIndex === idx;
 
-                          let ptColor = "#4da970"; // nom moss
-                          if (s.isTransgressed) ptColor = "#e27551"; // active breach
-                          else if (s.percentageLoss > 5) ptColor = "#eab308"; // intermediate warn
+                          let ptColor = "#4da970"; 
+                          if (s.isTransgressed) ptColor = "#e27551";
+                          else if (s.percentageLoss > 5) ptColor = "#eab308";
 
                           return (
                             <circle
@@ -1285,7 +1192,6 @@ export function BareBonesSlicer() {
                           );
                         })}
 
-                        {/* Interactive columns overlay for perfect hover tracking */}
                         {slices.map((s, idx) => {
                           const colW = 515 / slices.length;
                           const x = getX(idx) - (colW / 2);
@@ -1306,7 +1212,6 @@ export function BareBonesSlicer() {
                       </>
                     );
                   })()}
-                  {/* Axis lines */}
                   <line x1={65} y1={15} x2={65} y2={150} stroke="#5a4e45" strokeWidth="1.5" />
                   <line x1={65} y1={150} x2={580} y2={150} stroke="#5a4e45" strokeWidth="1.5" />
                 </svg>
@@ -1320,10 +1225,8 @@ export function BareBonesSlicer() {
 
           </div>
 
-           {/* 5. CO-REGULATION FRAME DETAILS DECK */}
           <div className="flex flex-col gap-6">
             
-            {/* COLUMN LEFT: INTEGRATOR TARGET DETAILS CARD */}
             <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none flex flex-col justify-between">
               <div>
                 <div className="flex justify-between items-center border-b border-[#3e342f] pb-2 mb-4">
@@ -1391,7 +1294,7 @@ export function BareBonesSlicer() {
                             : "bg-[#102a1d] border-emerald-800 text-emerald-400 shadow-sm"
                         }`}
                       >
-                        {chosenSlice.isTransgressed ? "💥 BREACH" : "✅ NOMINAL"}
+                        {chosenSlice.isTransgressed ? "BREACH" : "NOMINAL"}
                       </span>
                     </div>
                   </div>
@@ -1407,7 +1310,6 @@ export function BareBonesSlicer() {
               </div>
             </div>
 
-            {/* COLUMN RIGHT: EXTRACTED CONTIGUOUS BREACH ANOMALIES ZONE LEDGER */}
             <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none flex flex-col justify-between">
               <div>
                 <div className="flex justify-between items-center border-b border-[#3e342f] pb-2 mb-4">
@@ -1480,7 +1382,6 @@ export function BareBonesSlicer() {
 
           </div>
 
-          {/* 6. ADVANCED COMPARATIVE METRICS ENGINE OUTFLOW */}
           <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none mb-6">
             <div className="flex items-center gap-2 border-b border-[#3e342f] pb-2 mb-4">
               <Layers className="w-4 h-4 text-[#e27551] shrink-0" />
@@ -1576,7 +1477,6 @@ export function BareBonesSlicer() {
             </div>
           </div>
 
-          {/* 7. COMPLETE TABULAR SHEET LEDGER */}
           <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none">
             <div className="flex justify-between items-center border-b border-[#3e342f] pb-2 mb-4">
               <div className="flex items-center gap-2">
