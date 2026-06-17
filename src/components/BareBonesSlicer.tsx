@@ -452,7 +452,6 @@ export function BareBonesSlicer() {
       <div className="flex flex-col gap-4 mb-6">
         <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex-1">
-            <span className="text-[10px] font-mono tracking-wider font-bold text-[#e27551] uppercase">Phase I</span>
             <h3 className="font-sans text-sm font-bold text-[#faf3e8] mb-1">Upload Baseline Mesh:</h3>
           </div>
           <div className="flex items-center gap-3 shrink-0">
@@ -476,7 +475,6 @@ export function BareBonesSlicer() {
 
         <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex-1">
-            <span className="text-[10px] font-mono tracking-wider font-bold text-[#e27551] uppercase">Phase II</span>
             <h3 className="font-sans text-sm font-bold text-[#faf3e8] mb-1">Upload Transgressed Mesh:</h3>
           </div>
           <div className="flex items-center gap-3 shrink-0">
@@ -511,7 +509,7 @@ export function BareBonesSlicer() {
               <div className="flex justify-between items-center border-b border-[#3e342f] pb-2 mb-4">
                 <div className="flex items-center gap-2">
                   <h3 className="font-mono text-xs font-bold text-[#faf3e8] uppercase tracking-wider">
-                    II. SUBDIVISION & PRECISION CALIBRATION
+                    II. SUBDIVISION & CALIBRATION
                   </h3>
                 </div>
               </div>
@@ -695,7 +693,7 @@ export function BareBonesSlicer() {
                 <div className="flex justify-between items-center border-b border-[#3e342f] pb-2 mb-4">
                   <div className="flex items-center gap-2">
                     <h3 className="font-mono text-xs font-bold text-[#faf3e8] uppercase tracking-wider">
-                      III. CO-REGISTRATION MESH ALIGNMENT
+                      III. MESH ALIGNMENT
                     </h3>
                   </div>
                   <button
@@ -1219,7 +1217,7 @@ export function BareBonesSlicer() {
                 <div className="flex justify-between items-center border-b border-[#3e342f] pb-2 mb-4">
                   <div className="flex items-center gap-2">
                     <h3 className="font-mono text-xs font-bold text-[#faf3e8] uppercase tracking-wider">
-                      IV. SYNCHRONIZED FOCUS MEASURING TAPE
+                      IV. ESSENTIAL WALL INFORMATION
                     </h3>
                   </div>
                   <span className="text-[10px] font-mono font-bold border border-[#b25d43]/40 bg-[#3a1d15] text-[#faf3e8] px-2 py-0.5 rounded-none shadow-sm">
@@ -1300,13 +1298,12 @@ export function BareBonesSlicer() {
               <div>
                 <div className="flex justify-between items-center border-b border-[#3e342f] pb-2 mb-4">
                   <div className="flex items-center gap-2">
-                    <AlertTriangle className="w-4 h-4 text-[#e27551] shrink-0" />
                     <h3 className="font-mono text-xs font-bold text-[#faf3e8] uppercase tracking-wider">
-                      V. DRIFT ANOMALY BOUNDARY CRASH ZONES
+                      V. TRANSGRESSION ZONES
                     </h3>
                   </div>
                   <span className="text-[10px] font-mono text-[#faf3e8] bg-[#3a1d15] border border-[#3e342f] px-2 py-0.5 rounded-none shadow-sm">
-                    {anomalies.length} BLOCKS CLASSIFIED
+                    {anomalies.length} ZONES CLASSIFIED
                   </span>
                 </div>
 
@@ -1361,9 +1358,6 @@ export function BareBonesSlicer() {
                 )}
               </div>
 
-              <div className="text-[10px] text-[#bdae9e] font-mono text-center pt-2 border-t border-[#3e342f]">
-                Breach detection logic combines percentage area deflection with volumetric floor constants.
-              </div>
             </div>
 
           </div>
@@ -1371,7 +1365,7 @@ export function BareBonesSlicer() {
           <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none mb-6">
             <div className="flex items-center gap-2 border-b border-[#3e342f] pb-2 mb-4">
               <h3 className="font-mono text-xs font-bold text-[#faf3e8] uppercase tracking-wider">
-                VI. FINE SPATIAL CORRELATION METRICS
+                VI. SPATIAL CORRELATION METRICS
               </h3>
             </div>
 
@@ -1450,7 +1444,7 @@ export function BareBonesSlicer() {
                     <strong className="text-[#faf3e8]">{metrics ? `${metrics.beforeTrimmedCount} vertices` : "N/A"}</strong>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#bdae9e]">Active comparison point count (trimmed):</span>
+                    <span className="text-[#bdae9e]">Active transgression point count (trimmed):</span>
                     <strong className="text-[#faf3e8]">{metrics ? `${metrics.afterTrimmedCount} vertices` : "N/A"}</strong>
                   </div>
                   <div className="flex justify-between border-t border-[#3e342f] pt-1">
@@ -1466,7 +1460,7 @@ export function BareBonesSlicer() {
             <div className="flex justify-between items-center border-b border-[#3e342f] pb-2 mb-4">
               <div className="flex items-center gap-2">
                 <h3 className="font-mono text-xs font-bold text-[#faf3e8] uppercase tracking-wider">
-                  VII. FULL SPATIAL INTERACTION SYSTEM SHEET LEDGER
+                  VII. FULL SYSTEM LEDGER
                 </h3>
               </div>
               <button
