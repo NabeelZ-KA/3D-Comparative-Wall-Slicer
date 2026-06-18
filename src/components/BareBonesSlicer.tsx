@@ -393,21 +393,21 @@ export function BareBonesSlicer() {
     const lines = text.split("\n");
     return lines.map((line, ix) => {
       if (line.startsWith("### ")) {
-        return <h4 key={ix} className="text-[#e27551] font-mono text-xs font-bold mt-4 mb-2 tracking-tight uppercase flex items-center {ix === 0 ? 'mt-1' : ''}"><ChevronRight className="w-4 h-4 mr-1 text-[#e27551] shrink-0" />{line.replace("### ", "")}</h4>;
+        return <h4 key={ix} className="text-[#402F22] font-mono text-xs font-bold mt-4 mb-2 tracking-tight uppercase flex items-center {ix === 0 ? 'mt-1' : ''}"><ChevronRight className="w-4 h-4 mr-1 text-[#402F22] shrink-0" />{line.replace("### ", "")}</h4>;
       }
       if (line.startsWith("## ") || line.startsWith("# ")) {
-        return <h3 key={ix} className="text-[#faf3e8] font-sans text-sm font-bold mt-5 mb-2 border-l-2 border-[#b25d43] pl-2">{line.replace("## ", "").replace("# ", "")}</h3>;
+        return <h3 key={ix} className="text-[#402F22] font-sans text-sm font-bold mt-5 mb-2 border-l-2 border-[#b25d43] pl-2">{line.replace("## ", "").replace("# ", "")}</h3>;
       }
       if (line.trim().startsWith("- ") || line.trim().startsWith("* ")) {
         const itemText = line.trim().replace(/^[-*]\s+/, "");
         return (
-          <li key={ix} className="text-[#cdc3b0] font-sans text-[12.5px] leading-relaxed ml-4 my-1 list-disc">
+          <li key={ix} className="text-[#402F22] font-sans text-[12.5px] leading-relaxed ml-4 my-1 list-disc">
             {parseInlineBold(itemText)}
           </li>
         );
       }
       if (line.trim().length > 0) {
-        return <p key={ix} className="text-[#cdc3b0] font-sans text-xs leading-relaxed my-2">{parseInlineBold(line)}</p>;
+        return <p key={ix} className="text-[#402F22] font-sans text-xs leading-relaxed my-2">{parseInlineBold(line)}</p>;
       }
       return <div key={ix} className="h-1"></div>;
     });
@@ -415,21 +415,21 @@ export function BareBonesSlicer() {
 
   const parseInlineBold = (txt: string) => {
     const parts = txt.split("**");
-    return parts.map((part, i) => i % 2 === 1 ? <strong key={i} className="text-[#e27551] font-bold">{part}</strong> : part);
+    return parts.map((part, i) => i % 2 === 1 ? <strong key={i} className="text-[#402F22] font-bold">{part}</strong> : part);
   };
 
   return (
-    <div className="w-full flex flex-col bg-[#13110f] text-[#cdc3b0] antialiased font-sans" id="barebones-slicer-view">
-      <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+    <div className="w-full flex flex-col bg-[#FAEBD7] text-[#402F22] antialiased font-sans" id="barebones-slicer-view">
+      <div className="bg-[#FCDAB9] border border-[#FEC89A] p-4 rounded-none mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
         <div>
-          <span className="font-sans text-sm font-bold text-[#faf3e8] mb-1">
+          <span className="font-sans text-sm font-bold text-[#402F22] mb-1">
             Load a Pre-Generated Dataset to Test Out Our Website!
           </span>
         </div>
         
         <button
           onClick={loadMockGeometricRig}
-          className="flex items-center gap-1.5 px-3.5 py-1.5 bg-[#c7694a] hover:bg-[#c8694c] text-white text-xs font-mono font-bold rounded-none border border-[#b25d43] transition cursor-pointer shrink-0"
+          className="flex items-center test-[#402F22] gap-1.5 px-3.5 py-1.5 bg-[#FFBEAF] hover:bg-[#FECBBA] text-xs font-mono font-bold rounded-none border border-[#FEC89A] transition cursor-pointer shrink-0"
         >
           <span>Load Simulated 16m Dataset</span>
         </button>
@@ -450,13 +450,13 @@ export function BareBonesSlicer() {
       )}
 
       <div className="flex flex-col gap-4 mb-6">
-        <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="bg-[#FCDAB9] border border-[#FEC89A] p-4 rounded-none flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex-1">
-            <h3 className="font-sans text-sm font-bold text-[#faf3e8] mb-1">Upload Baseline Mesh:</h3>
+            <h3 className="font-sans text-sm font-bold text-[#402F22] mb-1">Upload Baseline Mesh:</h3>
           </div>
           <div className="flex items-center gap-3 shrink-0">
-            <label className="flex items-center justify-center gap-2 cursor-pointer bg-[#25201d] hover:bg-[#342a25] border border-[#3e342f] text-[#cdc3b0] text-xs font-mono py-1.5 px-4 rounded-none transition w-full text-center shadow-sm">
-              <Upload className="w-3.5 h-3.5 text-[#e27551] shrink-0" />
+            <label className="flex items-center justify-center gap-2 cursor-pointer bg-[#FFBEAF] hover:bg-[#FECBBA] border border-[#FEC89A] text-[#402F22] text-xs font-mono py-1.5 px-4 rounded-none transition w-full text-center">
+              <Upload className="w-3.5 h-3.5 text-[#402F22] shrink-0" />
               <span>{beforeFileName ? "Replace OBJ File" : "Select Baseline OBJ..."}</span>
               <input type="file" accept=".obj" className="hidden" onChange={(e) => handleFileChange(e, "before")} />
             </label>
@@ -467,19 +467,19 @@ export function BareBonesSlicer() {
             )}
           </div>
           {beforeFileName && (
-            <div className="text-[11.5px] font-mono text-[#bdae9e] border-t md:border-t-0 md:border-l border-[#3e342f] pt-2 md:pt-0 md:pl-3 truncate shrink-0 max-w-xs">
-              File: <strong className="text-[#faf3e8]">{beforeFileName}</strong>
+            <div className="text-[11.5px] font-mono text-[#402F22] border-t md:border-t-0 md:border-l border-[#FEC89A] pt-2 md:pt-0 md:pl-3 truncate shrink-0 max-w-xs">
+              File: <strong className="text-[#402F22]">{beforeFileName}</strong>
             </div>
           )}
         </div>
 
-        <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="bg-[#FCDAB9] border border-[#FEC89A] p-4 rounded-none flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex-1">
-            <h3 className="font-sans text-sm font-bold text-[#faf3e8] mb-1">Upload Transgressed Mesh:</h3>
+            <h3 className="font-sans text-sm font-bold text-[#402F22] mb-1">Upload Transgressed Mesh:</h3>
           </div>
           <div className="flex items-center gap-3 shrink-0">
-            <label className="flex items-center justify-center gap-2 cursor-pointer bg-[#25201d] hover:bg-[#342a25] border border-[#3e342f] text-[#cdc3b0] text-xs font-mono py-1.5 px-4 rounded-none transition w-full text-center shadow-sm">
-              <Upload className="w-3.5 h-3.5 text-[#e27551] shrink-0" />
+            <label className="flex items-center justify-center gap-2 cursor-pointer bg-[#FFBEAF] hover:bg-[#FECBBA] border border-[#FEC89A] text-[#402F22] text-xs font-mono py-1.5 px-4 rounded-none transition w-full text-center shadow-sm">
+              <Upload className="w-3.5 h-3.5 text-[#402F22] shrink-0" />
               <span>{afterFileName ? "Replace OBJ File" : "Select Comparative OBJ..."}</span>
               <input type="file" accept=".obj" className="hidden" onChange={(e) => handleFileChange(e, "after")} />
             </label>
@@ -490,8 +490,8 @@ export function BareBonesSlicer() {
             )}
           </div>
           {afterFileName && (
-            <div className="text-[11.5px] font-mono text-[#bdae9e] border-t md:border-t-0 md:border-l border-[#3e342f] pt-2 md:pt-0 md:pl-3 truncate shrink-0 max-w-xs">
-              File: <strong className="text-[#faf3e8]">{afterFileName}</strong>
+            <div className="text-[11.5px] font-mono text-[#402F22] border-t md:border-t-0 md:border-l border-[#FEC89A] pt-2 md:pt-0 md:pl-3 truncate shrink-0 max-w-xs">
+              File: <strong className="text-[#402F22]">{afterFileName}</strong>
             </div>
           )}
         </div>
@@ -505,11 +505,11 @@ export function BareBonesSlicer() {
           
           <div className="space-y-4">
             
-            <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none">
-              <div className="flex justify-between items-center border-b border-[#3e342f] pb-2 mb-4">
+            <div className="bg-[#FCDAB9] border border-[#FEC89A] p-4 rounded-none">
+              <div className="flex justify-between items-center border-b border-[#FEC89A] pb-2 mb-4">
                 <div className="flex items-center gap-2">
-                  <h3 className="font-mono text-xs font-bold text-[#faf3e8] uppercase tracking-wider">
-                    II. SUBDIVISION & CALIBRATION
+                  <h3 className="font-mono text-xs font-bold text-[#402F22] uppercase tracking-wider">
+                    SUBDIVISION & CALIBRATION
                   </h3>
                 </div>
               </div>
@@ -517,8 +517,8 @@ export function BareBonesSlicer() {
               <div className="space-y-4">
                 <div>
                   <div className="flex justify-between text-xs font-mono mb-1">
-                    <span className="text-[#cdc3b0]">Cross-sectional subdivision density:</span>
-                    <strong className="text-[#e27551] font-bold">{sliceCount} intervals</strong>
+                    <span className="text-[#402F22]">Cross-sectional subdivision density:</span>
+                    <strong className="text-[#402F22] font-bold">{sliceCount} intervals</strong>
                   </div>
                   <input
                     type="range"
@@ -527,17 +527,17 @@ export function BareBonesSlicer() {
                     step="5"
                     value={sliceCount}
                     onChange={(e) => setSliceCount(parseInt(e.target.value))}
-                    className="w-full h-1.5 bg-[#25201d] rounded-none appearance-none cursor-pointer accent-[#e27551]"
+                    className="w-full h-1.5 bg-[#FAEBD7] rounded-none appearance-none cursor-pointer accent-[#e27551]"
                   />
-                  <span className="text-[10px] text-[#bdae9e] block mt-1 leading-relaxed">
+                  <span className="text-[10px] text-[#402F22] block mt-1 leading-relaxed">
                     Splits baseline mesh into cross-sectional slices. Higher steps yield continuous integrals. Original standard: 10-100 in steps of 5.
                   </span>
                 </div>
 
                 <div>
                   <div className="flex justify-between text-xs font-mono mb-1">
-                    <span className="text-[#cdc3b0]">Percentage Area depletion floor:</span>
-                    <strong className="text-[#e27551] font-bold">{lossThreshold.toFixed(1)}% loss</strong>
+                    <span className="text-[#402F22]">Percentage Area depletion floor:</span>
+                    <strong className="text-[#402F22] font-bold">{lossThreshold.toFixed(1)}% loss</strong>
                   </div>
                   <input
                     type="range"
@@ -546,17 +546,17 @@ export function BareBonesSlicer() {
                     step="0.5"
                     value={lossThreshold}
                     onChange={(e) => setLossThreshold(parseFloat(e.target.value))}
-                    className="w-full h-1.5 bg-[#25201d] rounded-none appearance-none cursor-pointer accent-[#e27551]"
+                    className="w-full h-1.5 bg-[#FAEBD7] rounded-none appearance-none cursor-pointer accent-[#e27551]"
                   />
-                  <span className="text-[10px] text-[#bdae9e] block mt-1 leading-relaxed">
+                  <span className="text-[10px] text-[#402F22] block mt-1 leading-relaxed">
                     Required slice volume decrease to evaluate an element as &quot;actively breached&quot;. Original standard: 0.5% - 35.0%.
                   </span>
                 </div>
 
                 <div>
                   <div className="flex justify-between text-xs font-mono mb-1">
-                    <span className="text-[#cdc3b0]">Metric volume deficit limit:</span>
-                    <strong className="text-[#e27551] font-bold">{valVolumeThreshold.toFixed(4)} m³</strong>
+                    <span className="text-[#402F22]">Metric volume deficit limit:</span>
+                    <strong className="text-[#402F22] font-bold">{valVolumeThreshold.toFixed(4)} m³</strong>
                   </div>
                   <input
                     type="range"
@@ -565,17 +565,17 @@ export function BareBonesSlicer() {
                     step="0.0001"
                     value={valVolumeThreshold}
                     onChange={(e) => setValVolumeThreshold(parseFloat(e.target.value))}
-                    className="w-full h-1.5 bg-[#25201d] rounded-none appearance-none cursor-pointer accent-[#e27551]"
+                    className="w-full h-1.5 bg-[#FAEBD7] rounded-none appearance-none cursor-pointer accent-[#e27551]"
                   />
-                  <span className="text-[10px] text-[#bdae9e] block mt-1 leading-relaxed">
+                  <span className="text-[10px] text-[#402F22] block mt-1 leading-relaxed">
                     Ignores micro-gaps (e.g., stone crevices, dust index) during contiguous fail grouping. Original standard: 0.0001 - 0.0150 m³.
                   </span>
                 </div>
 
                 <div>
                   <div className="flex justify-between text-xs font-mono mb-1">
-                    <span className="text-[#cdc3b0]">Deficit Severity Index (DSI) scaling:</span>
-                    <strong className="text-[#e27551] font-bold">{dsiSensitivity.toFixed(2)}x</strong>
+                    <span className="text-[#402F22]">Deficit Severity Index (DSI) scaling:</span>
+                    <strong className="text-[#402F22] font-bold">{dsiSensitivity.toFixed(2)}x</strong>
                   </div>
                   <input
                     type="range"
@@ -584,17 +584,17 @@ export function BareBonesSlicer() {
                     step="0.05"
                     value={dsiSensitivity}
                     onChange={(e) => setDsiSensitivity(parseFloat(e.target.value))}
-                    className="w-full h-1.5 bg-[#25201d] rounded-none appearance-none cursor-pointer accent-[#e27551]"
+                    className="w-full h-1.5 bg-[#FAEBD7] rounded-none appearance-none cursor-pointer accent-[#e27551]"
                   />
-                  <span className="text-[10px] text-[#bdae9e] block mt-1 leading-relaxed">
+                  <span className="text-[10px] text-[#402F22] block mt-1 leading-relaxed">
                     Scalar multiplier to gauge architectural risk relative to baseline volume layers. Original standard: 0.10x - 3.00x.
                   </span>
                 </div>
 
-                <div className="border-t border-[#3e342f] pt-3">
+                <div className="border-t border-[#FEC89A] pt-3">
                   <div className="flex justify-between text-xs font-mono mb-1.5">
-                    <span className="text-[#cdc3b0]">Scan Slicing Axis:</span>
-                    <strong className="text-[#e27551] font-mono">{slicingAxis}-Axis</strong>
+                    <span className="text-[#402F22]">Scan Slicing Axis:</span>
+                    <strong className="text-[#402F22] font-mono">{slicingAxis}-Axis</strong>
                   </div>
                   <div className="grid grid-cols-2 gap-2">
                     <button
@@ -602,8 +602,8 @@ export function BareBonesSlicer() {
                       onClick={() => setSlicingAxis("X")}
                       className={`px-3 py-1.5 rounded-none text-[11px] font-mono font-bold border transition flex items-center justify-center gap-1 cursor-pointer ${
                           slicingAxis === "X"
-                            ? "bg-[#b25d43] text-white border-[#b25d43] shadow-sm"
-                            : "bg-[#25201d] hover:bg-[#342a25] text-[#cdc3b0] border-[#3e342f]"
+                            ? "bg-[#FAEBD7] text-[#402F22] border-[#FEC89A] shadow-sm"
+                            : "bg-[#FFBEAF] hover:bg-[#FECBBA] text-[#402F22] border-[#FEC89A]"
                       }`}
                     >
                       <span>X-Axis (Long)</span>
@@ -613,8 +613,8 @@ export function BareBonesSlicer() {
                       onClick={() => setSlicingAxis("Y")}
                       className={`px-3 py-1.5 rounded-none text-[11px] font-mono font-bold border transition flex items-center justify-center gap-1 cursor-pointer ${
                           slicingAxis === "Y"
-                            ? "bg-[#b25d43] text-white border-[#b25d43] shadow-sm"
-                            : "bg-[#25201d] hover:bg-[#342a25] text-[#cdc3b0] border-[#3e342f]"
+                            ? "bg-[#FAEBD7] text-[#402F22] border-[#FEC89A] shadow-sm"
+                            : "bg-[#FFBEAF] hover:bg-[#FECBBA] text-[#402F22] border-[#FEC89A]"
                       }`}
                     >
                       <span>Y-Axis (Cross)</span>
@@ -622,10 +622,10 @@ export function BareBonesSlicer() {
                   </div>
                 </div>
 
-                <div className="border-t border-[#3e342f] pt-3">
+                <div className="border-t border-[#FEC89A] pt-3">
                   <div className="flex justify-between text-xs font-mono mb-1.5">
-                    <span className="text-[#cdc3b0]">Height Filtering (Outlier Noise):</span>
-                    <strong className="text-[#e27551] font-mono">
+                    <span className="text-[#402F22]">Height Filtering (Outlier Noise):</span>
+                    <strong className="text-[#402F22] font-mono">
                       {heightEstimationPct === 100 ? "No Filter (Max Z)" : `${heightEstimationPct}% Percentile`}
                     </strong>
                   </div>
@@ -641,8 +641,8 @@ export function BareBonesSlicer() {
                         onClick={() => setHeightEstimationPct(opt.val)}
                         className={`px-1 py-1.5 rounded-none text-[11px] font-mono font-bold border transition flex items-center justify-center cursor-pointer ${
                           heightEstimationPct === opt.val
-                            ? "bg-[#b25d43] text-white border-[#b25d43] shadow-sm"
-                            : "bg-[#25201d] hover:bg-[#342a25] text-[#cdc3b0] border-[#3e342f]"
+                            ? "bg-[#FAEBD7] text-[#402F22] border-[#FEC89A] shadow-sm"
+                            : "bg-[#FFBEAF] hover:bg-[#FECBBA] text-[#402F22] border-[#FEC89A]"
                         }`}
                         title={opt.desc}
                       >
@@ -652,10 +652,10 @@ export function BareBonesSlicer() {
                   </div>
                 </div>
 
-                <div className="border-t border-[#3e342f] pt-3">
+                <div className="border-t border-[#FEC89A] pt-3">
                   <div className="flex justify-between text-xs font-mono mb-1.5">
-                    <span className="text-[#cdc3b0]">Void Shadow Interpolation:</span>
-                    <strong className="text-[#e27551] font-mono">
+                    <span className="text-[#402F22]">Void Shadow Interpolation:</span>
+                    <strong className="text-[#402F22] font-mono">
                       {voidHandling === "strict" ? "Strict Void" : "Interpolate"}
                     </strong>
                   </div>
@@ -665,8 +665,8 @@ export function BareBonesSlicer() {
                       onClick={() => setVoidHandling("strict")}
                       className={`px-3 py-1.5 rounded-none text-[11px] font-mono font-bold border transition flex items-center justify-center gap-1 cursor-pointer ${
                           voidHandling === "strict"
-                            ? "bg-[#b25d43] text-white border-[#b25d43] shadow-sm"
-                            : "bg-[#25201d] hover:bg-[#342a25] text-[#cdc3b0] border-[#3e342f]"
+                            ? "bg-[#FAEBD7] text-[#402F22] border-[#FEC89A] shadow-sm"
+                            : "bg-[#FFBEAF] hover:bg-[#FECBBA] text-[#402F22] border-[#FEC89A]"
                       }`}
                     >
                       <span>Strict Void (0 Area)</span>
@@ -676,8 +676,8 @@ export function BareBonesSlicer() {
                       onClick={() => setVoidHandling("interpolate")}
                       className={`px-3 py-1.5 rounded-none text-[11px] font-mono font-bold border transition flex items-center justify-center gap-1 cursor-pointer ${
                           voidHandling === "interpolate"
-                            ? "bg-[#b25d43] text-white border-[#b25d43] shadow-sm"
-                            : "bg-[#25201d] hover:bg-[#342a25] text-[#cdc3b0] border-[#3e342f]"
+                            ? "bg-[#FAEBD7] text-[#402F22] border-[#FEC89A] shadow-sm"
+                            : "bg-[#FFBEAF] hover:bg-[#FECBBA] text-[#402F22] border-[#FEC89A]"
                       }`}
                     >
                       <span>Smooth Gap (Averaged)</span>
@@ -688,19 +688,19 @@ export function BareBonesSlicer() {
               </div>
             </div>
 
-            <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none flex flex-col justify-between">
+            <div className="bg-[#FCDAB9] border border-[#FEC89A] p-4 rounded-none flex flex-col justify-between">
               <div>
-                <div className="flex justify-between items-center border-b border-[#3e342f] pb-2 mb-4">
+                <div className="flex justify-between items-center border-b border-[#FEC89A] pb-2 mb-4">
                   <div className="flex items-center gap-2">
-                    <h3 className="font-mono text-xs font-bold text-[#faf3e8] uppercase tracking-wider">
-                      III. MESH ALIGNMENT
+                    <h3 className="font-mono text-xs font-bold text-[#402F22] uppercase tracking-wider">
+                      MESH ALIGNMENT
                     </h3>
                   </div>
                   <button
                     onClick={handleAutoAlign}
-                    className="flex items-center gap-1.5 px-2.5 py-1 bg-[#25201d] hover:bg-[#342a25] border border-[#3e342f] text-[#e27551] font-mono text-[10.5px] font-bold tracking-wide rounded-none shadow-sm transition shrink-0 cursor-pointer"
+                    className="flex items-center gap-1.5 px-2.5 py-1 bg-[#FFBEAF] hover:bg-[#FECBBA] border border-[#FEC89A] text-[#402F22] font-mono text-[10.5px] font-bold tracking-wide rounded-none shadow-sm transition shrink-0 cursor-pointer"
                   >
-                    <RefreshCw className="w-3 h-3 text-[#e27551] shrink-0" />
+                    <RefreshCw className="w-3 h-3 text-[#402F22] shrink-0" />
                     <span>Auto-Align Coordinates</span>
                   </button>
                 </div>
@@ -708,8 +708,8 @@ export function BareBonesSlicer() {
                 <div className="space-y-4">
                   <div>
                     <div className="flex justify-between text-xs font-mono mb-1">
-                      <span className="text-[#cdc3b0]">Baseline Trim (Z-Crop Height):</span>
-                      <strong className="text-[#faf3e8]">{beforeZTrim.toFixed(3)} m</strong>
+                      <span className="text-[#402F22]">Baseline Trim (Z-Crop Height):</span>
+                      <strong className="text-[#402F22]">{beforeZTrim.toFixed(3)} m</strong>
                     </div>
                     <input
                       type="range"
@@ -718,14 +718,14 @@ export function BareBonesSlicer() {
                       step="0.01"
                       value={beforeZTrim}
                       onChange={(e) => setBeforeZTrim(parseFloat(e.target.value))}
-                      className="w-full h-1.5 bg-[#25201d] rounded-none appearance-none cursor-pointer accent-[#e27551]"
+                      className="w-full h-1.5 bg-[#FAEBD7] rounded-none appearance-none cursor-pointer accent-[#e27551]"
                     />
                   </div>
 
                   <div>
                     <div className="flex justify-between text-xs font-mono mb-1">
-                      <span className="text-[#cdc3b0]">Comparison Trim (Z-Crop Height):</span>
-                      <strong className="text-[#faf3e8]">{afterZTrim.toFixed(3)} m</strong>
+                      <span className="text-[#402F22]">Comparison Trim (Z-Crop Height):</span>
+                      <strong className="text-[#402F22]">{afterZTrim.toFixed(3)} m</strong>
                     </div>
                     <input
                       type="range"
@@ -734,14 +734,14 @@ export function BareBonesSlicer() {
                       step="0.01"
                       value={afterZTrim}
                       onChange={(e) => setAfterZTrim(parseFloat(e.target.value))}
-                      className="w-full h-1.5 bg-[#25201d] rounded-none appearance-none cursor-pointer accent-[#e27551]"
+                      className="w-full h-1.5 bg-[#FAEBD7] rounded-none appearance-none cursor-pointer accent-[#e27551]"
                     />
                   </div>
 
-                  <div className="grid grid-cols-3 gap-3 border-t border-[#3e342f] pt-3 mt-3">
+                  <div className="grid grid-cols-3 gap-3 border-t border-[#FEC89A] pt-3 mt-3">
                     <div>
                       <div className="flex justify-between text-[11px] font-mono mb-1">
-                        <span className="text-[#bdae9e] font-bold text-xs">X Offset:</span>
+                        <span className="text-[#402F22] font-bold text-xs">X Offset:</span>
                       </div>
                       <input
                         type="range"
@@ -750,16 +750,16 @@ export function BareBonesSlicer() {
                         step="0.01"
                         value={xOffset}
                         onChange={(e) => setXOffset(parseFloat(e.target.value))}
-                        className="w-full h-1 bg-[#25201d] rounded-none appearance-none cursor-pointer accent-[#e27551]"
+                        className="w-full h-1 bg-[#FAEBD7] rounded-none appearance-none cursor-pointer accent-[#e27551]"
                       />
-                      <span className="text-[11px] font-mono text-[#faf3e8] block text-center mt-1 font-semibold">
+                      <span className="text-[11px] font-mono text-[#402F22] block text-center mt-1 font-semibold">
                         {xOffset >= 0 ? `+${xOffset.toFixed(2)}` : xOffset.toFixed(2)}m
                       </span>
                     </div>
 
                     <div>
                       <div className="flex justify-between text-[11px] font-mono mb-1">
-                        <span className="text-[#bdae9e] font-bold text-xs">Y Offset:</span>
+                        <span className="text-[#402F22] font-bold text-xs">Y Offset:</span>
                       </div>
                       <input
                         type="range"
@@ -768,16 +768,16 @@ export function BareBonesSlicer() {
                         step="0.01"
                         value={yOffset}
                         onChange={(e) => setYOffset(parseFloat(e.target.value))}
-                        className="w-full h-1 bg-[#25201d] rounded-none appearance-none cursor-pointer accent-[#e27551]"
+                        className="w-full h-1 bg-[#FAEBD7] rounded-none appearance-none cursor-pointer accent-[#e27551]"
                       />
-                      <span className="text-[11px] font-mono text-[#faf3e8] block text-center mt-1 font-semibold">
+                      <span className="text-[11px] font-mono text-[#402F22] block text-center mt-1 font-semibold">
                         {yOffset >= 0 ? `+${yOffset.toFixed(2)}` : yOffset.toFixed(2)}m
                       </span>
                     </div>
 
                     <div>
                       <div className="flex justify-between text-[11px] font-mono mb-1">
-                        <span className="text-[#bdae9e] font-bold text-xs">Z Offset:</span>
+                        <span className="text-[#402F22] font-bold text-xs">Z Offset:</span>
                       </div>
                       <input
                         type="range"
@@ -786,9 +786,9 @@ export function BareBonesSlicer() {
                         step="0.01"
                         value={zOffset}
                         onChange={(e) => setZOffset(parseFloat(e.target.value))}
-                        className="w-full h-1 bg-[#25201d] rounded-none appearance-none cursor-pointer accent-[#e27551]"
+                        className="w-full h-1 bg-[#FAEBD7] rounded-none appearance-none cursor-pointer accent-[#e27551]"
                       />
-                      <span className="text-[11px] font-mono text-[#faf3e8] block text-center mt-1 font-semibold">
+                      <span className="text-[11px] font-mono text-[#402F22] block text-center mt-1 font-semibold">
                         {zOffset >= 0 ? `+${zOffset.toFixed(2)}` : zOffset.toFixed(2)}m
                       </span>
                     </div>
@@ -801,27 +801,27 @@ export function BareBonesSlicer() {
 
           <div className="flex flex-col gap-6 my-6">
             
-            <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none flex flex-col justify-between">
+            <div className="bg-[#FCDAB9] border border-[#FEC89A] p-4 rounded-none flex flex-col justify-between">
               <div>
                 <div className="flex justify-between items-center mb-1">
-                  <h4 className="font-mono text-xs font-bold text-[#faf3e8] uppercase tracking-wider">
+                  <h4 className="font-mono text-xs font-bold text-[#402F22] uppercase tracking-wider">
                     Graph A: Superimposed Volume Profile
                   </h4>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-none bg-[#25201d] border border-[#3e342f] text-[#faf3e8] font-semibold shadow-sm">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-none bg-[#FFBEAF] border border-[#FEC89A] text-[#402F22] font-semibold shadow-sm">
                     Volume (m³)
                   </span>
                 </div>
-                <p className="text-[11px] text-[#bdae9e] leading-relaxed mb-4">
+                <p className="text-[11px] text-[#402F22] leading-relaxed mb-4">
                   Baseline original volume (dashed border, soft fill) vs current comparative remaining volume (solid orange) plotted together.
                 </p>
               </div>
 
-              <div className="w-full relative bg-[#13110f] rounded-none p-2 border border-[#3e342f]">
+              <div className="w-full relative bg-[#FAEBD7] rounded-none p-2 border border-[#FEC89A]">
                 <svg viewBox="0 0 600 180" className="w-full h-44 overflow-visible">
                   <defs>
                     <linearGradient id="solidGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#ea580c" stopOpacity="0.32" />
-                      <stop offset="100%" stopColor="#ea580c" stopOpacity="0" />
+                      <stop offset="0%" stopColor="#FECBBA" stopOpacity="0.5" />
+                      <stop offset="100%" stopColor="#FECBBA" stopOpacity="0" />
                     </linearGradient>
                   </defs>
                   
@@ -850,8 +850,8 @@ export function BareBonesSlicer() {
                           const y = getY(val);
                           return (
                             <g key={tIdx}>
-                              <line x1={65} y1={y} x2={580} y2={y} stroke="#2d2521" strokeWidth="1" strokeDasharray="3,3" />
-                              <text x={58} y={y + 3} fontSize="9px" fontFamily="monospace" fill="#bdae9e" textAnchor="end">
+                              <line x1={65} y1={y} x2={580} y2={y} stroke="#402F22" strokeWidth="1" strokeDasharray="3,3" />
+                              <text x={58} y={y + 3} fontSize="9px" fontFamily="monospace" fill="#402F22" textAnchor="end">
                                 {val.toFixed(4)}
                               </text>
                             </g>
@@ -870,9 +870,9 @@ export function BareBonesSlicer() {
                                 y={15}
                                 width={widthBand}
                                 height={135}
-                                fill="#ef4444"
+                                fill="#f89191ff"
                                 fillOpacity={isSliceInZone ? "0.15" : "0.06"}
-                                stroke="#f87171"
+                                stroke="#fc4c4cff"
                                 strokeWidth={isSliceInZone ? "1" : "0.5"}
                                 strokeDasharray="2,2"
                               />
@@ -884,9 +884,9 @@ export function BareBonesSlicer() {
                           d={`M 65,150 ${slices.map((s, idx) => {
                             return `L ${getX(idx).toFixed(1)},${getY(s.originalVolume).toFixed(1)}`;
                           }).join(" ")} L 580,150 Z`}
-                          fill="#5a4e45"
+                          fill="#402F22"
                           fillOpacity="0.12"
-                          stroke="#cdc3b0"
+                          stroke="#402F22"
                           strokeWidth="1.2"
                           strokeDasharray="3,3"
                         />
@@ -896,7 +896,7 @@ export function BareBonesSlicer() {
                             return `L ${getX(idx).toFixed(1)},${getY(s.transgressedVolume).toFixed(1)}`;
                           }).join(" ")} L 580,150 Z`}
                           fill="url(#solidGrad)"
-                          stroke="#e27551"
+                          stroke="#FFB5A7"
                           strokeWidth="2.2"
                         />
 
@@ -928,7 +928,7 @@ export function BareBonesSlicer() {
                                 y1={10}
                                 x2={xVal}
                                 y2={150}
-                                stroke="#b25d43"
+                                stroke="#FFB5A7"
                                 strokeWidth="1.5"
                                 strokeDasharray="2,2"
                               />
@@ -936,14 +936,14 @@ export function BareBonesSlicer() {
                                 cx={xVal}
                                 cy={getY(selS.originalVolume)}
                                 r="4"
-                                fill="#cdc3b0"
+                                fill="#402F22"
                               />
                               <circle
                                 cx={xVal}
                                 cy={getY(selS.transgressedVolume)}
                                 r="5.5"
-                                fill="#e27551"
-                                className="stroke-[#13110f] stroke-2"
+                                fill="#FFB5A7"
+                                className="stroke-[#FAEBD7] stroke-2"
                               />
                             </g>
                           );
@@ -951,33 +951,33 @@ export function BareBonesSlicer() {
                       </>
                     );
                   })()}
-                  <line x1={65} y1={15} x2={65} y2={150} stroke="#5a4e45" strokeWidth="1.5" />
-                  <line x1={65} y1={150} x2={580} y2={150} stroke="#5a4e45" strokeWidth="1.5" />
+                  <line x1={65} y1={15} x2={65} y2={150} stroke="#402F22" strokeWidth="1.5" />
+                  <line x1={65} y1={150} x2={580} y2={150} stroke="#402F22" strokeWidth="1.5" />
                 </svg>
-                <div className="flex justify-between text-[10px] font-mono text-[#bdae9e] mt-2 pl-14">
+                <div className="flex justify-between text-[10px] font-mono text-[#402F22] mt-2 pl-14">
                   <span>0.00m (origin)</span>
-                  <span className="text-[#faf3e8] font-bold">Volume envelope (baseline vs current)</span>
+                  <span className="text-[#402F22] font-bold">Volume envelope (baseline vs current)</span>
                   <span>{lengthMeters.toFixed(2)}m (bound)</span>
                 </div>
               </div>
             </div>
 
-            <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none flex flex-col justify-between">
+            <div className="bg-[#FCDAB9] border border-[#FEC89A] p-4 rounded-none flex flex-col justify-between">
               <div>
                 <div className="flex justify-between items-center mb-1">
-                  <h4 className="font-mono text-xs font-bold text-[#faf3e8] uppercase tracking-wider">
+                  <h4 className="font-mono text-xs font-bold text-[#402F22] uppercase tracking-wider">
                     Graph B: Volumetric Loss Percentage
                   </h4>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-none bg-[#25201d] border border-[#3e342f] text-[#faf3e8] font-semibold shadow-sm">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-none bg-[#FFBEAF] border border-[#FEC89A] text-[#402F22] font-semibold shadow-sm">
                     Loss (%)
                   </span>
                 </div>
-                <p className="text-[11px] text-[#bdae9e] leading-relaxed mb-4">
+                <p className="text-[11px] text-[#402F22] leading-relaxed mb-4">
                   Real-time calculated cross-sectional percentage area depletion. Higher vertical bars represent severe active material collapse.
                 </p>
               </div>
 
-              <div className="w-full relative bg-[#13110f] rounded-none p-2 border border-[#3e342f]">
+              <div className="w-full relative bg-[#FAEBD7] rounded-none p-2 border border-[#FEC89A]">
                 <svg viewBox="0 0 600 180" className="w-full h-44 overflow-visible">
                   {slices.length > 0 && (() => {
                     const maxLoss = Math.max(...slices.map(item => item.percentageLoss), 5.0);
@@ -991,8 +991,8 @@ export function BareBonesSlicer() {
                           const y = getY(val);
                           return (
                             <g key={ratio}>
-                              <line x1={65} y1={y} x2={580} y2={y} stroke="#2d2521" strokeWidth="1" strokeDasharray="3,3" />
-                              <text x={58} y={y + 3} fontSize="9px" fontFamily="monospace" fill="#bdae9e" textAnchor="end">
+                              <line x1={65} y1={y} x2={580} y2={y} stroke="#402F22" strokeWidth="1" strokeDasharray="3,3" />
+                              <text x={58} y={y + 3} fontSize="9px" fontFamily="monospace" fill="#402F22" textAnchor="end">
                                 {val.toFixed(1)}%
                               </text>
                             </g>
@@ -1011,9 +1011,9 @@ export function BareBonesSlicer() {
                                 y={15}
                                 width={widthBand}
                                 height={135}
-                                fill="#ef4444"
+                                fill="#f89191ff"
                                 fillOpacity={isSliceInZone ? "0.15" : "0.06"}
-                                stroke="#f87171"
+                                stroke="#fc4c4cff"
                                 strokeWidth={isSliceInZone ? "1" : "0.5"}
                                 strokeDasharray="2,2"
                               />
@@ -1032,7 +1032,7 @@ export function BareBonesSlicer() {
                               y={150 - h}
                               width={colW}
                               height={Math.max(0.5, h)}
-                              fill={s.isTransgressed ? "#e27551" : "#5a4e45"}
+                              fill={s.isTransgressed ? "#FFBEAF" : "#402F22"}
                               fillOpacity={idx === selectedSliceIndex ? "1.0" : "0.6"}
                             />
                           );
@@ -1062,7 +1062,7 @@ export function BareBonesSlicer() {
                             y1={10}
                             x2={getX(selectedSliceIndex)}
                             y2={150}
-                            stroke="#b25d43"
+                            stroke="#FFB5A7"
                             strokeWidth="1.5"
                             strokeDasharray="2,2"
                           />
@@ -1070,33 +1070,33 @@ export function BareBonesSlicer() {
                       </>
                     );
                   })()}
-                  <line x1={65} y1={15} x2={65} y2={150} stroke="#5a4e45" strokeWidth="1.5" />
-                  <line x1={65} y1={150} x2={580} y2={150} stroke="#5a4e45" strokeWidth="1.5" />
+                  <line x1={65} y1={15} x2={65} y2={150} stroke="#402F22" strokeWidth="1.5" />
+                  <line x1={65} y1={150} x2={580} y2={150} stroke="#402F22" strokeWidth="1.5" />
                 </svg>
-                <div className="flex justify-between text-[10px] font-mono text-[#bdae9e] mt-2 pl-14">
+                <div className="flex justify-between text-[10px] font-mono text-[#402F22] mt-2 pl-14">
                   <span>0.00m</span>
-                  <span className="text-[#faf3e8] font-bold">Percentage Area collapse spectrum</span>
+                  <span className="text-[#402F22] font-bold">Percentage Area collapse spectrum</span>
                   <span>{lengthMeters.toFixed(2)}m</span>
                 </div>
               </div>
             </div>
 
-            <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none flex flex-col justify-between">
+            <div className="bg-[#FCDAB9] border border-[#FEC89A] p-4 rounded-none flex flex-col justify-between">
               <div>
                 <div className="flex justify-between items-center mb-1">
-                  <h4 className="font-mono text-xs font-bold text-[#faf3e8] uppercase tracking-wider">
+                  <h4 className="font-mono text-xs font-bold text-[#402F22] uppercase tracking-wider">
                     Graph C: Severity Index (DSI)
                   </h4>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-none bg-[#25201d] border border-[#3e342f] text-[#faf3e8] font-semibold shadow-sm">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-none bg-[#FFBEAF] border border-[#FEC89A] text-[#402F22] font-semibold shadow-sm">
                     Coefficient
                   </span>
                 </div>
-                <p className="text-[11px] text-[#bdae9e] leading-relaxed mb-4">
+                <p className="text-[11px] text-[#402F22] leading-relaxed mb-4">
                   Gauge structural collapse risk based on volume lost multiplied by scaling sensitivity. Peaks denote unstable hollow breaches.
                 </p>
               </div>
 
-              <div className="w-full relative bg-[#13110f] rounded-none p-2 border border-[#3e342f]">
+              <div className="w-full relative bg-[#FAEBD7] rounded-none p-2 border border-[#FEC89A]">
                 <svg viewBox="0 0 600 180" className="w-full h-44 overflow-visible">
                   {slices.length > 0 && (() => {
                     const getSeverity = (s: any) => s.percentageLoss * s.volumeDifference * dsiSensitivity;
@@ -1111,8 +1111,8 @@ export function BareBonesSlicer() {
                           const y = getY(val);
                           return (
                             <g key={ratio}>
-                              <line x1={65} y1={y} x2={580} y2={y} stroke="#2d2521" strokeWidth="1" strokeDasharray="3,3" />
-                              <text x={58} y={y + 3} fontSize="9px" fontFamily="monospace" fill="#bdae9e" textAnchor="end">
+                              <line x1={65} y1={y} x2={580} y2={y} stroke="#402F22" strokeWidth="1" strokeDasharray="3,3" />
+                              <text x={58} y={y + 3} fontSize="9px" fontFamily="monospace" fill="#402F22" textAnchor="end">
                                 {val.toFixed(3)}
                               </text>
                             </g>
@@ -1131,9 +1131,9 @@ export function BareBonesSlicer() {
                                 y={15}
                                 width={widthBand}
                                 height={135}
-                                fill={isSliceInZone ? "#f87171" : "#f87171"}
+                                fill={isSliceInZone ? "#fc4c4cff" : "#f89191ff"}
                                 fillOpacity={isSliceInZone ? "0.15" : "0.06"}
-                                stroke="#f87171"
+                                stroke="#fc4c4cff"
                                 strokeWidth={isSliceInZone ? "1" : "0.5"}
                                 strokeDasharray="2,2"
                               />
@@ -1147,7 +1147,7 @@ export function BareBonesSlicer() {
                             return `${idx === 0 ? "M" : "L"} ${getX(idx).toFixed(1)},${getY(val).toFixed(1)}`;
                           }).join(" ")}
                           fill="none"
-                          stroke="#b25d43"
+                          stroke="#FFB5A7"
                           strokeWidth="2"
                         />
 
@@ -1157,9 +1157,9 @@ export function BareBonesSlicer() {
                           const yVal = getY(sValue);
                           const isSelected = selectedSliceIndex === idx;
 
-                          let ptColor = "#4da970"; 
-                          if (s.isTransgressed) ptColor = "#e27551";
-                          else if (s.percentageLoss > 5) ptColor = "#eab308";
+                          let ptColor = "hsla(143, 70%, 48%, 1.00)"; 
+                          if (s.isTransgressed) ptColor = "hsla(0, 70%, 48%, 1.00)";
+                          else if (s.percentageLoss > 5) ptColor = "hsla(45, 70%, 60%, 1.00)";
 
                           return (
                             <circle
@@ -1168,7 +1168,7 @@ export function BareBonesSlicer() {
                               cy={yVal}
                               r={isSelected ? 5.5 : 2.5}
                               fill={isSelected ? "#ffd27a" : ptColor}
-                              stroke={isSelected ? "#13110f" : "none"}
+                              stroke={isSelected ? "#FAEBD7" : "none"}
                               strokeWidth={isSelected ? 1 : 0}
                               className="cursor-pointer"
                               onMouseEnter={() => setSelectedSliceIndex(idx)}
@@ -1197,12 +1197,12 @@ export function BareBonesSlicer() {
                       </>
                     );
                   })()}
-                  <line x1={65} y1={15} x2={65} y2={150} stroke="#5a4e45" strokeWidth="1.5" />
-                  <line x1={65} y1={150} x2={580} y2={150} stroke="#5a4e45" strokeWidth="1.5" />
+                  <line x1={65} y1={15} x2={65} y2={150} stroke="#402F22" strokeWidth="1.5" />
+                  <line x1={65} y1={150} x2={580} y2={150} stroke="#402F22" strokeWidth="1.5" />
                 </svg>
-                <div className="flex justify-between text-[10px] font-mono text-[#bdae9e] mt-2 pl-14">
+                <div className="flex justify-between text-[10px] font-mono text-[#402F22] mt-2 pl-14">
                   <span>0.00m origin</span>
-                  <span className="text-[#faf3e8] font-bold">Stable (Green) ➔ Warning (Yellow) ➔ Collapse (Red)</span>
+                  <span className="text-[#402F22] font-bold">Stable (Green) ➔ Warning (Yellow) ➔ Collapse (Red)</span>
                   <span>{lengthMeters.toFixed(2)}m</span>
                 </div>
               </div>
@@ -1212,70 +1212,70 @@ export function BareBonesSlicer() {
 
           <div className="flex flex-col gap-6">
             
-            <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none flex flex-col justify-between">
+            <div className="bg-[#FCDAB9] border border-[#FEC89A] p-4 rounded-none flex flex-col justify-between">
               <div>
-                <div className="flex justify-between items-center border-b border-[#3e342f] pb-2 mb-4">
+                <div className="flex justify-between items-center border-b border-[#FEC89A] pb-2 mb-4">
                   <div className="flex items-center gap-2">
-                    <h3 className="font-mono text-xs font-bold text-[#faf3e8] uppercase tracking-wider">
-                      IV. ESSENTIAL WALL INFORMATION
+                    <h3 className="font-mono text-xs font-bold text-[#402F22] uppercase tracking-wider">
+                      ESSENTIAL WALL INFORMATION
                     </h3>
                   </div>
-                  <span className="text-[10px] font-mono font-bold border border-[#b25d43]/40 bg-[#3a1d15] text-[#faf3e8] px-2 py-0.5 rounded-none shadow-sm">
+                  <span className="text-[10px] font-mono font-bold border border-[#FEC89A]/40 bg-[#FFBEAF] text-[#402F22] px-2 py-0.5 rounded-none shadow-sm">
                     Slice #{selectedSliceIndex !== null ? selectedSliceIndex : "None"}
                   </span>
                 </div>
 
                 {chosenSlice ? (
                   <div className="space-y-2 font-mono text-xs">
-                    <div className="flex justify-between py-1 border-b border-[#3e342f]/40">
-                      <span className="text-[#bdae9e]">Longitudinal Location (X):</span>
-                      <strong className="text-[#faf3e8]">{chosenSlice.positionX.toFixed(3)} m</strong>
+                    <div className="flex justify-between py-1 border-b border-[#FEC89A]/40">
+                      <span className="text-[#402F22]">Longitudinal Location (X):</span>
+                      <strong className="text-[#402F22]">{chosenSlice.positionX.toFixed(3)} m</strong>
                     </div>
 
-                    <div className="flex justify-between py-1 border-b border-[#3e342f]/40">
-                      <span className="text-[#bdae9e]">Nominal Original Height / Width:</span>
-                      <strong className="text-[#faf3e8]">{chosenSlice.originalHeight.toFixed(3)}m / {chosenSlice.originalWidth.toFixed(3)}m</strong>
+                    <div className="flex justify-between py-1 border-b border-[#FEC89A]/40">
+                      <span className="text-[#402F22]">Nominal Original Height / Width:</span>
+                      <strong className="text-[#402F22]">{chosenSlice.originalHeight.toFixed(3)}m / {chosenSlice.originalWidth.toFixed(3)}m</strong>
                     </div>
 
-                    <div className="flex justify-between py-1 border-b border-[#3e342f]/40">
-                      <span className="text-[#bdae9e]">Transgressed Height / Width:</span>
-                      <strong className="text-[#faf3e8]">{chosenSlice.transgressedHeight.toFixed(3)}m / {chosenSlice.transgressedWidth.toFixed(3)}m</strong>
+                    <div className="flex justify-between py-1 border-b border-[#FEC89A]/40">
+                      <span className="text-[#402F22]">Transgressed Height / Width:</span>
+                      <strong className="text-[#402F22]">{chosenSlice.transgressedHeight.toFixed(3)}m / {chosenSlice.transgressedWidth.toFixed(3)}m</strong>
                     </div>
 
-                    <div className="flex justify-between py-1 border-b border-[#3e342f]/40">
-                      <span className="text-[#bdae9e]">Baseline original Volume segment:</span>
-                      <strong className="text-[#faf3e8]">{chosenSlice.originalVolume.toFixed(4)} m³</strong>
+                    <div className="flex justify-between py-1 border-b border-[#FEC89A]/40">
+                      <span className="text-[#402F22]">Baseline original Volume segment:</span>
+                      <strong className="text-[#402F22]">{chosenSlice.originalVolume.toFixed(4)} m³</strong>
                     </div>
 
-                    <div className="flex justify-between py-1 border-b border-[#3e342f]/40">
-                      <span className="text-[#bdae9e]">Remaining Volume segment (aligned):</span>
-                      <strong className="text-[#faf3e8]">{chosenSlice.transgressedVolume.toFixed(4)} m³</strong>
+                    <div className="flex justify-between py-1 border-b border-[#FEC89A]/40">
+                      <span className="text-[#402F22]">Remaining Volume segment (aligned):</span>
+                      <strong className="text-[#402F22]">{chosenSlice.transgressedVolume.toFixed(4)} m³</strong>
                     </div>
 
-                    <div className="flex justify-between py-1 border-b border-[#3e342f]/40">
-                      <span className="text-[#e27551] font-bold">Cross-Sectional Area loss ratio %:</span>
-                      <strong className="text-[#e27551]">-{chosenSlice.percentageLoss.toFixed(1)}%</strong>
+                    <div className="flex justify-between py-1 border-b border-[#FEC89A]/40">
+                      <span className="text-[#402F22]">Cross-Sectional Area loss ratio %:</span>
+                      <strong className="text-[#402F22]">-{chosenSlice.percentageLoss.toFixed(1)}%</strong>
                     </div>
 
-                    <div className="flex justify-between py-1 border-b border-[#3e342f]/40">
-                      <span className="text-[#e27551] font-bold">Stone displacement volume (dx):</span>
-                      <strong className="text-[#e27551]">-{chosenSlice.volumeDifference.toFixed(4)} m³</strong>
+                    <div className="flex justify-between py-1 border-b border-[#FEC89A]/40">
+                      <span className="text-[#402F22]">Stone displacement volume (dx):</span>
+                      <strong className="text-[#402F22]">-{chosenSlice.volumeDifference.toFixed(4)} m³</strong>
                     </div>
 
-                    <div className="flex justify-between py-1 border-b border-[#3e342f]/40">
-                      <span className="text-[#bdae9e]">Pedestal alignment boundary:</span>
-                      <strong className="text-[#e27551]">
+                    <div className="flex justify-between py-1 border-b border-[#FEC89A]/40">
+                      <span className="text-[#402F22]">Pedestal alignment boundary:</span>
+                      <strong className="text-[#402F22]">
                         {chosenSlice.isBoundary ? `Trimmed (${chosenSlice.boundaryReason})` : "Active core wall"}
                       </strong>
                     </div>
 
                     <div className="flex justify-between items-center pt-2">
-                      <span className="text-[#bdae9e]">State safety alarm status:</span>
+                      <span className="text-[#402F22]">State safety alarm status:</span>
                       <span
                         className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-none border ${
                           chosenSlice.isTransgressed 
-                            ? "bg-[#2a1310] border-[#b25d43] text-[#e27551] shadow-sm"
-                            : "bg-[#102a1d] border-emerald-800 text-emerald-400 shadow-sm"
+                            ? "bg-[#FD958D] border-[#DB373A] text-[#DB373A] shadow-sm"
+                            : "bg-[#BDF1CA] border-[#70BA92] text-[#228359] shadow-sm"
                         }`}
                       >
                         {chosenSlice.isTransgressed ? "BREACH" : "NOMINAL"}
@@ -1283,32 +1283,32 @@ export function BareBonesSlicer() {
                     </div>
                   </div>
                 ) : (
-                  <div className="text-center py-12 text-[#bdae9e] italic text-xs">
+                  <div className="text-center py-12 text-[#402F22] italic text-xs">
                     Hover or click on any of the interactive plots above to project precise voxel interaction details.
                   </div>
                 )}
               </div>
 
-              <div className="text-[10.5px] text-[#bdae9e] font-mono text-center pt-3 mt-4 border-t border-[#3e342f]">
+              <div className="text-[10.5px] text-[#402F22] font-mono text-center pt-3 mt-4 border-t border-[#FEC89A]">
                 Values represent mathematical Riemann differentials calculated over slicing interval: <strong>{sliceStep.toFixed(3)}m</strong>
               </div>
             </div>
 
-            <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none flex flex-col justify-between">
+            <div className="bg-[#FCDAB9] border border-[#FEC89A] p-4 rounded-none flex flex-col justify-between">
               <div>
-                <div className="flex justify-between items-center border-b border-[#3e342f] pb-2 mb-4">
+                <div className="flex justify-between items-center border-b border-[#FEC89A] pb-2 mb-4">
                   <div className="flex items-center gap-2">
-                    <h3 className="font-mono text-xs font-bold text-[#faf3e8] uppercase tracking-wider">
-                      V. TRANSGRESSION ZONES
+                    <h3 className="font-mono text-xs font-bold text-[#402F22] uppercase tracking-wider">
+                      TRANSGRESSION ZONES
                     </h3>
                   </div>
-                  <span className="text-[10px] font-mono text-[#faf3e8] bg-[#3a1d15] border border-[#3e342f] px-2 py-0.5 rounded-none shadow-sm">
+                  <span className="text-[10px] font-mono text-[#402F22] bg-[#FFBEAF] border border-[#FEC89A] px-2 py-0.5 rounded-none shadow-sm">
                     {anomalies.length} ZONES CLASSIFIED
                   </span>
                 </div>
 
                 {anomalies.length === 0 ? (
-                  <div className="text-center py-12 text-[#bdae9e] italic text-xs leading-relaxed">
+                  <div className="text-center py-12 text-[#402F22] italic text-xs leading-relaxed">
                     Passed. Under current alert parameters, there are no contiguous dry-stone wall sections classified as structural anomalies.
                   </div>
                 ) : (
@@ -1322,33 +1322,33 @@ export function BareBonesSlicer() {
                           onClick={() => setSelectedSliceIndex(Math.floor((zone.startIndex + zone.endIndex) / 2))}
                           className={`border p-3 rounded-none text-left transition-all duration-150 cursor-pointer ${
                             isSliceInZone
-                              ? "bg-[#2c1d18] border-[#e27551] ring-1 ring-[#e27551]/30"
-                              : "bg-[#13110f] border-[#3e342f] hover:border-[#5a4e45]"
+                              ? "bg-[#FECBBA] border-[#FFB5A7] ring-1 ring-[#FFB5A7]/30"
+                              : "bg-[#FAEBD7] border-[#FEC89A] hover:border-[#FFB5A7]"
                           }`}
                         >
-                          <div className="flex justify-between items-center border-b border-[#3e342f] pb-1 mb-2">
-                            <span className="text-[10px] font-mono font-bold text-[#e27551] uppercase flex items-center gap-1">
+                          <div className="flex justify-between items-center border-b border-[#FEC89A] pb-1 mb-2">
+                            <span className="text-[10px] font-mono font-bold text-[#402F22] uppercase flex items-center gap-1">
                               CRITICAL EXCURSION #{idx + 1}
                               {isSliceInZone && (
-                                <span className="text-[9.5px] font-mono font-bold bg-[#b25d43] text-white px-1.5 py-0.2 rounded-sm ml-1 uppercase">
+                                <span className="text-[9.5px] font-mono font-bold bg-[#FEC89A] text-[#402F22] px-1.5 py-0.2 rounded-sm ml-1 uppercase">
                                   ACTIVE SELECT
                                 </span>
                               )}
                             </span>
-                            <span className="text-[10px] font-mono font-bold bg-[#1c1917] border border-[#3e342f] text-[#faf3e8] px-1.5 py-0.2 rounded-none">
+                            <span className="text-[10px] font-mono font-bold bg-[#FCDAB9] border border-[#FEC89A] text-[#402F22] px-1.5 py-0.2 rounded-none">
                               {zone.confidence}% Conf.
                             </span>
                           </div>
 
-                          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-2 font-mono text-[10.5px] text-[#bdae9e]">
+                          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-2 font-mono text-[10.5px] text-[#402F22]">
                             <div>
-                              Coord Range: <strong className="text-[#faf3e8] block mt-0.5">{zone.startDist.toFixed(1)}m - {zone.endDist.toFixed(1)}m</strong>
+                              Coord Range: <strong className="text-[#402F22] block mt-0.5">{zone.startDist.toFixed(1)}m - {zone.endDist.toFixed(1)}m</strong>
                             </div>
                             <div>
-                              Avg Section Loss: <strong className="text-[#e27551] block mt-0.5">-{zone.avgLoss.toFixed(1)}%</strong>
+                              Avg Section Loss: <strong className="text-[#402F22] block mt-0.5">-{zone.avgLoss.toFixed(1)}%</strong>
                             </div>
                             <div>
-                              Volumetric Deficit: <strong className="text-[#e27551] block mt-0.5 font-bold">-{zone.volLost.toFixed(4)} m³</strong>
+                              Volumetric Deficit: <strong className="text-[#402F22] block mt-0.5 font-bold">-{zone.volLost.toFixed(4)} m³</strong>
                             </div>
                           </div>
                         </div>
@@ -1362,120 +1362,120 @@ export function BareBonesSlicer() {
 
           </div>
 
-          <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none mb-6">
-            <div className="flex items-center gap-2 border-b border-[#3e342f] pb-2 mb-4">
-              <h3 className="font-mono text-xs font-bold text-[#faf3e8] uppercase tracking-wider">
-                VI. SPATIAL CORRELATION METRICS
+          <div className="bg-[#FCDAB9] border border-[#FEC89A] p-4 rounded-none mb-6">
+            <div className="flex items-center gap-2 border-b border-[#FEC89A] pb-2 mb-4">
+              <h3 className="font-mono text-xs font-bold text-[#402F22] uppercase tracking-wider">
+                SPATIAL CORRELATION METRICS
               </h3>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               
-              <div className="bg-[#13110f] border border-[#3e342f] p-3 rounded-none font-mono shadow-sm">
-                <span className="text-[10px] text-[#bdae9e] uppercase block mb-1">Chamfer Registration Error:</span>
-                <strong className="text-sm text-[#faf3e8] font-bold">
+              <div className="bg-[#FAEBD7] border border-[#FEC89A] p-3 rounded-none font-mono shadow-sm">
+                <span className="text-[10px] text-[#402F22] uppercase block mb-1">Chamfer Registration Error:</span>
+                <strong className="text-sm text-[#402F22] font-bold">
                   {metrics ? `${metrics.chamferDistance.toFixed(5)} m` : "N/A"}
                 </strong>
-                <span className="text-[9.5px] text-[#bdae9e] block mt-1 leading-relaxed">
+                <span className="text-[9.5px] text-[#402F22] block mt-1 leading-relaxed">
                   Dual-sided nearest-neighbor spatial drift margin.
                 </span>
               </div>
 
-              <div className="bg-[#13110f] border border-[#3e342f] p-3 rounded-none font-mono shadow-sm">
-                <span className="text-[10px] text-[#bdae9e] uppercase block mb-1">Max Hausdorff Gap limit:</span>
-                <strong className="text-sm text-[#faf3e8] font-bold">
+              <div className="bg-[#FAEBD7] border border-[#FEC89A] p-3 rounded-none font-mono shadow-sm">
+                <span className="text-[10px] text-[#402F22] uppercase block mb-1">Max Hausdorff Gap limit:</span>
+                <strong className="text-sm text-[#402F22] font-bold">
                   {metrics ? `${metrics.hausdorffDistance.toFixed(5)} m` : "N/A"}
                 </strong>
-                <span className="text-[9.5px] text-[#bdae9e] block mt-1 leading-relaxed">
+                <span className="text-[9.5px] text-[#402F22] block mt-1 leading-relaxed">
                   Absolute localized maximum gap distance between scans.
                 </span>
               </div>
 
-              <div className="bg-[#13110f] border border-[#3e342f] p-3 rounded-none font-mono shadow-sm">
-                <span className="text-[10px] text-[#bdae9e] uppercase block mb-1">Voxel Congruence Jaccard Score:</span>
+              <div className="bg-[#FAEBD7] border border-[#FEC89A] p-3 rounded-none font-mono shadow-sm">
+                <span className="text-[10px] text-[#402F22] uppercase block mb-1">Voxel Congruence Jaccard Score:</span>
                 <strong className="text-sm text-emerald-400 font-bold">
                   {metrics ? `${(metrics.jaccardIoU * 100).toFixed(2)}%` : "N/A"}
                 </strong>
-                <span className="text-[9.5px] text-[#bdae9e] block mt-1 leading-relaxed">
+                <span className="text-[9.5px] text-[#402F22] block mt-1 leading-relaxed">
                   Intersection-over-Union (IoU) of coordinate voxel maps.
                 </span>
               </div>
 
-              <div className="bg-[#13110f] border border-[#3e342f] p-3 rounded-none font-mono shadow-sm">
-                <span className="text-[10px] text-[#bdae9e] uppercase block mb-1">RMS Roughness Coefficient:</span>
-                <strong className="text-sm text-[#faf3e8] font-bold">
+              <div className="bg-[#FAEBD7] border border-[#FEC89A] p-3 rounded-none font-mono shadow-sm">
+                <span className="text-[10px] text-[#402F22] uppercase block mb-1">RMS Roughness Coefficient:</span>
+                <strong className="text-sm text-[#402F22] font-bold">
                   {metrics ? `${metrics.roughnessBefore.toFixed(3)}m ➔ ${metrics.roughnessAfter.toFixed(3)}m` : "N/A"}
                 </strong>
-                <span className="text-[9.5px] text-[#bdae9e] block mt-1 leading-relaxed">
+                <span className="text-[9.5px] text-[#402F22] block mt-1 leading-relaxed">
                   Micro-roughness elevation variance dispersion values.
                 </span>
               </div>
 
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6 pt-4 border-t border-[#3e342f]">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6 pt-4 border-t border-[#FEC89A]">
               <div>
-                <span className="text-[10px] uppercase font-mono tracking-wider font-bold text-[#faf3e8] block mb-1">
+                <span className="text-[10px] uppercase font-mono tracking-wider font-bold text-[#402F22] block mb-1">
                   Total integrated Volumetrics:
                 </span>
                 <div className="space-y-1 font-mono text-xs">
                   <div className="flex justify-between">
-                    <span className="text-[#bdae9e]">Total original calculated baseline Volume:</span>
-                    <strong className="text-[#faf3e8]">{statsBefore ? `${statsBefore.totalVol.toFixed(3)} m³` : "N/A"}</strong>
+                    <span className="text-[#402F22]">Total original calculated baseline Volume:</span>
+                    <strong className="text-[#402F22]">{statsBefore ? `${statsBefore.totalVol.toFixed(3)} m³` : "N/A"}</strong>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#bdae9e]">Total remaining calculated transgressed Volume:</span>
-                    <strong className="text-[#faf3e8]">{statsAfter ? `${statsAfter.totalVol.toFixed(3)} m³` : "N/A"}</strong>
+                    <span className="text-[#402F22]">Total remaining calculated transgressed Volume:</span>
+                    <strong className="text-[#402F22]">{statsAfter ? `${statsAfter.totalVol.toFixed(3)} m³` : "N/A"}</strong>
                   </div>
-                  <div className="flex justify-between border-t border-[#3e342f] pt-1">
-                    <span className="text-[#e27551] font-bold">Net integrated Material Deficit Volume Lost:</span>
-                    <strong className="text-[#e27551]">{statsBefore && statsAfter ? `${Math.max(0, statsBefore.totalVol - statsAfter.totalVol).toFixed(4)} m³` : "N/A"}</strong>
+                  <div className="flex justify-between border-t border-[#FEC89A] pt-1">
+                    <span className="text-[#402F22]">Net integrated Material Deficit Volume Lost:</span>
+                    <strong className="text-[#402F22]">{statsBefore && statsAfter ? `${Math.max(0, statsBefore.totalVol - statsAfter.totalVol).toFixed(4)} m³` : "N/A"}</strong>
                   </div>
                 </div>
               </div>
 
               <div>
-                <span className="text-[10px] uppercase font-mono tracking-wider font-bold text-[#faf3e8] block mb-1">
+                <span className="text-[10px] uppercase font-mono tracking-wider font-bold text-[#402F22] block mb-1">
                   Spatial overlap registration details:
                 </span>
                 <div className="space-y-1 font-mono text-xs">
                   <div className="flex justify-between">
-                    <span className="text-[#bdae9e]">Active baseline point count (trimmed):</span>
-                    <strong className="text-[#faf3e8]">{metrics ? `${metrics.beforeTrimmedCount} vertices` : "N/A"}</strong>
+                    <span className="text-[#402F22]">Active baseline point count (trimmed):</span>
+                    <strong className="text-[#402F22]">{metrics ? `${metrics.beforeTrimmedCount} vertices` : "N/A"}</strong>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-[#bdae9e]">Active transgression point count (trimmed):</span>
-                    <strong className="text-[#faf3e8]">{metrics ? `${metrics.afterTrimmedCount} vertices` : "N/A"}</strong>
+                    <span className="text-[#402F22]">Active transgression point count (trimmed):</span>
+                    <strong className="text-[#402F22]">{metrics ? `${metrics.afterTrimmedCount} vertices` : "N/A"}</strong>
                   </div>
-                  <div className="flex justify-between border-t border-[#3e342f] pt-1">
-                    <span className="text-[#bdae9e]">Calculated co-registration Shift Travel:</span>
-                    <strong className="text-[#e27551] font-bold">{metrics ? `${metrics.alignmentDistance.toFixed(4)} meters` : "N/A"}</strong>
+                  <div className="flex justify-between border-t border-[#FEC89A] pt-1">
+                    <span className="text-[#402F22]">Calculated co-registration Shift Travel:</span>
+                    <strong className="text-[#402F22] font-bold">{metrics ? `${metrics.alignmentDistance.toFixed(4)} meters` : "N/A"}</strong>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-[#1c1917] border border-[#3e342f] p-4 rounded-none">
-            <div className="flex justify-between items-center border-b border-[#3e342f] pb-2 mb-4">
+          <div className="bg-[#FCDAB9] border border-[#FEC89A] p-4 rounded-none">
+            <div className="flex justify-between items-center border-b border-[#FEC89A] pb-2 mb-4">
               <div className="flex items-center gap-2">
-                <h3 className="font-mono text-xs font-bold text-[#faf3e8] uppercase tracking-wider">
-                  VII. FULL SYSTEM LEDGER
+                <h3 className="font-mono text-xs font-bold text-[#402F22] uppercase tracking-wider">
+                  FULL SYSTEM LEDGER
                 </h3>
               </div>
               <button
                 onClick={handleExportCSV}
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-[#25201d] hover:bg-[#342a25] border border-[#3e342f] text-[#cdc3b0] font-mono text-[11px] font-bold tracking-wide rounded-none shadow-sm transition cursor-pointer"
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-[#FAEBD7] hover:bg-[#FCDAB9] border border-[#FEC89A] text-[#402F22] font-mono text-[11px] font-bold tracking-wide rounded-none shadow-sm transition cursor-pointer"
                 title="Download CSV Spreadsheet file"
               >
                 <span>Export ledger to CSV</span>
               </button>
             </div>
 
-            <div className="max-h-[350px] overflow-y-auto border border-[#3e342f] rounded-none">
-              <table className="w-full text-left font-mono text-[11px] text-[#cdc3b0] border-collapse">
+            <div className="max-h-[350px] overflow-y-auto border border-[#FEC89A] rounded-none">
+              <table className="w-full text-left font-mono text-[11px] text-[#402F22] border-collapse">
                 <thead>
-                  <tr className="bg-[#25201d] border-b border-[#3e342f] sticky top-0 text-[#faf3e8]">
+                  <tr className="bg-[#FAEBD7] border-b border-[#FEC89A] sticky top-0 text-[#402F22]">
                     <th className="p-2.5">Slice index</th>
                     <th className="p-2.5">Longitudinal Coord (m)</th>
                     <th className="p-2.5 text-right">Orig Volume (m³)</th>
@@ -1485,7 +1485,7 @@ export function BareBonesSlicer() {
                     <th className="p-2.5 text-center">Alert levels</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#3e342f]">
+                <tbody className="divide-y divide-[#FFB5A7]">
                   {slices.map((slice) => {
                     const isSelected = selectedSliceIndex === slice.sliceIndex;
                     return (
@@ -1493,28 +1493,28 @@ export function BareBonesSlicer() {
                         key={slice.sliceIndex}
                         id={`slice-row-${slice.sliceIndex}`}
                         onClick={() => setSelectedSliceIndex(slice.sliceIndex)}
-                        className={`hover:bg-[#e27551]/10 transition-colors cursor-pointer ${
-                          isSelected ? "bg-[#2c1d18] font-medium text-[#faf3e8] border-l-2 border-[#e27551]" : "text-[#cdc3b0]"
+                        className={`hover:bg-[#FFBEAF]/10 transition-colors cursor-pointer ${
+                          isSelected ? "bg-[#FECBBA] font-medium text-[#402F22] border-l-2 border-[#FFB5A7]" : "text-[#402F22]"
                         }`}
                       >
-                        <td className="p-2.5 text-[#faf3e8]">
+                        <td className="p-2.5 text-[#402F22]">
                           <strong>#{slice.sliceIndex}</strong>
                         </td>
                         <td className="p-2.5">{slice.positionX.toFixed(3)}m</td>
-                        <td className="p-2.5 text-right text-[#bdae9e]">{slice.originalVolume.toFixed(4)}</td>
-                        <td className="p-2.5 text-right text-[#faf3e8]">{slice.transgressedVolume.toFixed(4)}</td>
-                        <td className={`p-2.5 text-right font-bold ${slice.volumeDifference > 0.001 ? "text-[#e27551]" : ""}`}>
+                        <td className="p-2.5 text-right text-[#402F22]">{slice.originalVolume.toFixed(4)}</td>
+                        <td className="p-2.5 text-right text-[#402F22]">{slice.transgressedVolume.toFixed(4)}</td>
+                        <td className={`p-2.5 text-right font-bold ${slice.volumeDifference > 0.001 ? "text-[#402F22]" : ""}`}>
                           {slice.volumeDifference > 0.001 ? `-${slice.volumeDifference.toFixed(4)}` : "0.0000"}
                         </td>
-                        <td className={`p-2.5 text-right font-bold ${slice.percentageLoss > 0.1 ? "text-[#e27551]" : ""}`}>
+                        <td className={`p-2.5 text-right font-bold ${slice.percentageLoss > 0.1 ? "text-[#402F22]" : ""}`}>
                           {slice.percentageLoss > 0.1 ? `-${slice.percentageLoss.toFixed(1)}%` : "0.0%"}
                         </td>
                         <td className="p-2.5 text-center">
                           <span
                             className={`text-[9.5px] font-bold px-1.5 py-0.5 rounded-none border shadow-sm ${
                               slice.isTransgressed
-                                ? "bg-[#2a1310] text-[#e27551] border-[#b25d43]/40"
-                                : "bg-[#102a1d] text-emerald-400 border-emerald-800/40"
+                              ? "bg-[#FD958D] border-[#DB373A] text-[#DB373A] shadow-sm"
+                              : "bg-[#BDF1CA] border-[#70BA92] text-[#228359] shadow-sm"
                             }`}
                           >
                             {slice.isTransgressed ? "BREACH ALERT" : "NOMINAL"}
